@@ -25,6 +25,14 @@ module.exports = function (app) {
 
     });
 
+      // Load Coronavirus
+      app.get("/coronavirus", function (req, res) {
+        res.render("coronavirus", {
+            msg: "Welcome!",
+        });
+
+    });
+
     // Render 404 page for any unmatched routes
     app.get("*", function (req, res) {
         res.render("404");
