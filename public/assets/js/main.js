@@ -1,3 +1,5 @@
+
+
 $(document).ready(function () {
     "use strict";
     /* === Footer Instagram === */
@@ -196,4 +198,34 @@ $(document).ready(function () {
             return false;
         });
     }());
+
+    $("#tweetZone").empty();
+
+   $.post("/tweets")
+   
+   .then(function(data){
+       //console.log(data)
+       
+       for (let i=0;i<data.length;i++){
+           console.log(data[i].text)
+           console.log(data[i].entities.urls[0].url)
+           let newDiv=$("<div>")
+           newDiv.attr("class","single-tweet")
+           let newP=$("<p>")
+           newP.text(data[i].text)
+           let newUrl=$("<a>")
+           newUrl.attr("href",data[i].entities.urls[0].url)
+           newUrl.text(" " + data[i].entities.urls[0].url)
+           let newSpace=$("<br>")
+           let logo=$("<i>")
+           logo.attr("class","fa fa-twitter")
+           newUrl.prepend(logo)
+           newP.append(newSpace)
+           newP.append(newUrl)
+           newDiv.append(newP)
+           $("#tweetZone").append(newDiv)
+       }
+   })
+
+ 
 }());

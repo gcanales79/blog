@@ -25,7 +25,7 @@ app.engine(
 
   // Routes
 require("./routes/htmlRoutes")(app);
-//require("./routes/apiRoutes")(app);
+require("./routes/apiRoutes")(app);
 
 app.listen(PORT, function() {
     console.log(
