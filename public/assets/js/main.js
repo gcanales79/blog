@@ -210,30 +210,40 @@ $(document).ready(function () {
                 //console.log(data[i].text)
                 let datos = data[i].text
                 let tweet = datos.split("https")
+                //console.log(data[i].created_at)
+                let fechaTweet=moment(data[i].created_at,"ddd MMM DD HH:mm:ss ZZ YYYY")
+                let now=moment()
+                //console.log(now)
+                //console.log((fechaTweet))
+                let diasTweet=now.diff(fechaTweet,"days")
+                //console.log(diasTweet)
                 //console.log(tweet)
                 let tweetText = tweet[0];
                 let tweetLink = "https" + tweet[1];
-                console.log(tweetText);
-                console.log(tweetLink)
+                //console.log(tweetText);
+                //console.log(tweetLink)
                 //console.log(typeof(data[i].entities.media))
                 //if (typeof(data[i].entities.media) != "undefined") {
                 //console.log(data[i].entities.media[0].url)
                 //}
+                
                 let newDiv = $("<div>")
                 newDiv.attr("class", "single-tweet")
                 let newP = $("<p>")
                 newP.text(tweetText)
                 let newUrl = $("<a>")
-
                 newUrl.attr("href", tweetLink)
                 newUrl.text(" " + tweetLink)
                 let newSpace = $("<br>")
                 let logo = $("<i>")
                 logo.attr("class", "fa fa-twitter")
-                newUrl.prepend(logo)
+                let newh4=$("<h4>")
+                newh4.text("Tweeted on " + diasTweet + " days ago.")
+                newh4.prepend(logo)
                 newP.append(newSpace)
                 newP.append(newUrl)
                 newDiv.append(newP)
+                newDiv.append(newh4)
                 $("#tweetZone").append(newDiv)
             }
         })
