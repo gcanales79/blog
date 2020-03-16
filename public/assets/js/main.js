@@ -204,23 +204,29 @@ $(document).ready(function () {
     $.post("/tweets")
 
         .then(function (data) {
-            console.log(data)
+            //console.log(data)
 
             for (let i = 0; i < data.length; i++) {
-                console.log(data[i].text)
-                console.log(typeof(data[i].entities.media))
-                if (typeof(data[i].entities.media) != "undefined") {
-                    console.log(data[i].entities.media[0].url)
-                }
+                //console.log(data[i].text)
+                let datos = data[i].text
+                let tweet = datos.split("https")
+                //console.log(tweet)
+                let tweetText = tweet[0];
+                let tweetLink = "https" + tweet[1];
+                console.log(tweetText);
+                console.log(tweetLink)
+                //console.log(typeof(data[i].entities.media))
+                //if (typeof(data[i].entities.media) != "undefined") {
+                //console.log(data[i].entities.media[0].url)
+                //}
                 let newDiv = $("<div>")
                 newDiv.attr("class", "single-tweet")
                 let newP = $("<p>")
-                newP.text(data[i].text)
+                newP.text(tweetText)
                 let newUrl = $("<a>")
-                if (typeof(data[i].entities.media) != "undefined") {
-                    newUrl.attr("href", data[i].entities.media[0].url)
-                    newUrl.text(" " + data[i].entities.media[0].url)
-                }
+
+                newUrl.attr("href", tweetLink)
+                newUrl.text(" " + tweetLink)
                 let newSpace = $("<br>")
                 let logo = $("<i>")
                 logo.attr("class", "fa fa-twitter")
