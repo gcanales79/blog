@@ -25,9 +25,17 @@ module.exports = function (app) {
 
     });
 
-      // Load Coronavirus
-      app.get("/coronavirus", function (req, res) {
+    // Load Coronavirus
+    app.get("/coronavirus", function (req, res) {
         res.render("coronavirus", {
+            msg: "Welcome!",
+        });
+
+    });
+
+     // Cookies
+     app.get("/cookies", function (req, res) {
+        res.render("cookies", {
             msg: "Welcome!",
         });
 
