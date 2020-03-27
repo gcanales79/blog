@@ -37,7 +37,7 @@ for (let i = 0; i < countries.length; i++) {
         .then((response) => {
             console.log(response.data.stat_by_country[response.data.stat_by_country.length - 1]);
             console.log(moment(response.data.stat_by_country[response.data.stat_by_country.length - 1].record_date).format("YYYY-MM-DD"))
-            axios.post("http://localhost:3000/datos"+countries[i], {
+            axios.post("https://bitesoftheworld/datos"+countries[i], {
                 fecha: moment(response.data.stat_by_country[response.data.stat_by_country.length - 1].record_date).format("YYYY-MM-DD"),
                 total_cases: (response.data.stat_by_country[response.data.stat_by_country.length - 1].total_cases).replace(/,/g, ''),
                 new_cases: (response.data.stat_by_country[response.data.stat_by_country.length - 1].new_cases).replace(/,/g, ''),
