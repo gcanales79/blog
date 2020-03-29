@@ -1,8 +1,9 @@
 $(document).ready(function () {
+    let caso = 1;
 
-    obtenerDatos();
+    obtenerDatos(caso);
 
-    function obtenerDatos() {
+    function obtenerDatos(caso) {
 
         $.when(
             $.get("/api/todos/datosSpain", function (data) {
@@ -49,10 +50,13 @@ $(document).ready(function () {
             }
 
             graficaCasos(casosES, casosIT, casosMX, casosPL)
+            graficaPorcentajes(casosES, casosIT, casosMX, casosPL, caso)
+
         })
     }
 
-    //Chart JS esto se pone al principio para que no muestre datos viejos|
+    //Chart JS esto se pone al principio para que no muestre datos viejos
+    //Grafica de Casos Totales 
     var myChart;
 
     function graficaCasos(casosES, casosIT, casosMX, casosPL) {
@@ -69,7 +73,7 @@ $(document).ready(function () {
         if (myChart) {
             myChart.destroy();
         }
-        var ctx = $("#myChart");
+        let ctx = $("#myChart");
         myChart = new Chart(ctx, {
             type: "line",
             data: {
@@ -143,9 +147,9 @@ $(document).ready(function () {
                             }
 
                         },
-                        scaleLabel:{
-                            display:true,
-                            labelString:"Total Cases"
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Total Cases"
                         }
 
 
@@ -164,12 +168,171 @@ $(document).ready(function () {
                         $("#loadingGraph").hide()
                     }
                 },
-                maintainAspectRatio:false,
+                maintainAspectRatio: false,
             }
         })
 
 
     }
+
+    //Grafica de Incremento de Casos %
+
+    var myChart2;
+
+    function graficaPorcentajes(casosES, casosIT, casosMX, casosPL, caso) {
+
+
+        var porcentaje = [];
+        var label = "";
+        var colorBarras="";
+
+        switch (caso) {
+            case 1:
+                label = "Italy"
+                colorBarras="rgb(255,99,132"
+                for (let i = 0; i < casosIT.length - 1; i++) {
+                    porcentaje.push(((casosIT[i + 1] - casosIT[i]) / casosIT[i] * 100).toFixed(0))
+                    if (i == casosIT.length - 2) {
+                        console.log(porcentaje)
+                    }
+                }
+                break;
+            case 2:
+                for (let i = 0; i < casosES.length - 1; i++) {
+                    label = "Spain"
+                    colorBarras="rgba(75, 192, 192"
+                    porcentaje.push(((casosES[i + 1] - casosES[i]) / casosES[i] * 100).toFixed(0))
+                    if (i == casosES.length - 2) {
+                        console.log(porcentaje)
+                    }
+                }
+                break;
+            case 3:
+                for (let i = 0; i < casosMX.length - 1; i++) {
+                    label = "Mexico";
+                    colorBarras="rgba(54, 162, 235"
+                    porcentaje.push(((casosMX[i + 1] - casosMX[i]) / casosMX[i] * 100).toFixed(0))
+                    if (i == casosMX.length - 2) {
+                        console.log(porcentaje)
+                    }
+                }
+                break;
+            case 4:
+                for (let i = 0; i < casosPL.length - 1; i++) {
+                    label = "Poland";
+                    colorBarras="rgb(254,214,0"
+                    porcentaje.push(((casosPL[i + 1] - casosPL[i]) / casosPL[i] * 100).toFixed(0))
+                    if (i == casosPL.length - 2) {
+                        console.log(porcentaje)
+                    }
+                }
+                break;
+        }
+
+
+        let ejeY = []
+        for (let i = 0; i < porcentaje.length; i++) {
+            if (i % 5 == 0) {
+                ejeY.push(i)
+            }
+            else {
+                ejeY.push("")
+            }
+        }
+
+        if (myChart2) {
+            myChart2.destroy();
+        }
+        let ctx = $("#myChart2");
+        myChart2 = new Chart(ctx, {
+            type: "bar",
+            data: {
+                labels: ejeY,
+
+                datasets: [{
+                    label: label,
+                    backgroundColor: colorBarras+",0.2)",
+                    borderColor: colorBarras+",1)",
+                    borderWidth: 1,
+                    data: porcentaje,
+                },
+                ]
+
+            },
+            options: {
+                scales: {
+                    yAxes: [{
+                        ticks: {
+                            beginAtZero: true,
+                            min: 0,
+                            max: 100,
+                            callback: function (value, index, values) {
+                                if (value === 100) return "100%";
+                                if (value === 90) return "90%";
+                                if (value === 80) return "80%";
+                                if (value === 70) return "70%";
+                                if (value === 60) return "60%";
+                                if (value === 50) return "50%";
+                                if (value === 40) return "40%";
+                                if (value === 30) return "30%";
+                                if (value === 20) return "20%";
+                                if (value === 10) return "10%";
+                                if (value === 0) return "0%";
+                                return null;
+                            }
+
+                        },
+                        scaleLabel: {
+                            display: true,
+                            labelString: "% of Increase vs One Day Before"
+                        }
+
+
+                    }],
+                    xAxes: [{
+                        scaleLabel: {
+                            display: true,
+                            labelString: "Number of days since 100th case"
+                        }
+
+                    }]
+                },
+                animation: {
+                    duration: 2000,
+                    onProgress: function () {
+                        $("#loadingGraph2").hide()
+                    }
+                },
+                maintainAspectRatio: true,
+            }
+        })
+
+    }
+
+    $("#percentageItaly").on("click", function (event) {
+        event.preventDefault();
+        let caso = 1;
+        obtenerDatos(caso)
+    })
+
+    $("#percentageSpain").on("click", function (event) {
+        event.preventDefault();
+        let caso = 2;
+        obtenerDatos(caso)
+    })
+
+    $("#percentageMexico").on("click", function (event) {
+        event.preventDefault();
+        let caso = 3;
+        obtenerDatos(caso)
+    })
+
+    $("#percentagePoland").on("click", function (event) {
+        event.preventDefault();
+        let caso = 4;
+        obtenerDatos(caso)
+    })
+
 
 
 })
