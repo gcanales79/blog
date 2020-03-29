@@ -1,0 +1,127 @@
+<div class="kotha-default-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <article class="single-blog">
+                    <div class="post-thumb">
+                        <img src="assets/images/kanapa.jpg" alt="">
+                    </div>
+                    <div class="post-content">
+                        <div class="entry-header text-center text-uppercase">
+                            <a href="/coming-soon" class="post-cat">Travel</a>
+                            <h2>Coronavirus Data</h2>
+                        </div>
+                        <div class="entry-content">
+                            <p>We have seen the graph of total cases many times. Of course the main
+                                focus has been China, US, Italy and Spain, but the question that
+                                everyone that doesn’t leave on any of this countries is how my country
+                                doing regarding the infection rate. There are plenty of questions that
+                                make us doubt about the data, if each country is doing the same amount
+                                of testing, is the cases being register on time or not, but for now
+                                this is the only data we have. I have put Italy and Spain as reference
+                                because we have seen that these two countries have been hit very hard
+                                with the Coronavirus crisis. I am glad that Poland rate seems much
+                                lower than these countries and it seems that the early adoptions of
+                                the quarantine are showing results. The result on Mexico even do are
+                                doubtful, due to the limit amount of testing that is being done,
+                                shows good results. I hope they are really good and is not that the
+                                government has decided to hide information from the people.
+                            </p>
+                            </br>
+                            <p>Note: This graph is updated daily so my comments might not be accurate at
+                                the time you see the graph.</p>
+
+                            <div class="row">
+                                <div class="col-sm-12 col-lg">
+                                    <div id="graficaCasos">
+                                        <h2>Total COVID-19 Cases</h2>
+                                        <div id="loadingGraph" class="loader"></div>
+                                        <canvas id="myChart"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <h3 class="text-brand">#Zostanwdomu Poland</h3>
+
+                            <p>This is the traffic index for Warsaw according to TOMTOM traffic index. It shows
+                                the congestion level of the roads and you can compare the average of 2019 to the
+                                last 7 days. It is amazing seeing how the level has reduced from 80% on the rush
+                                hours to 20%. I can imagine the impact that is having on the economy. Less people
+                                going out, less people spending. The good news is that, as we see in the Total Cases
+                                Graph all this sacrifice seems that is working.
+                            </p>
+                            <img class="post-img img-responsive text-center" src="assets/images/trafficwarsaw.jpg"
+                                alt="">
+
+
+                            <h3 class="text-brand">#QuedateEnCasa Mexico</h3>
+                            <p>The below graph is the traffic index for Mexico City. I have to be honest that I was
+                                surprise to see the result. Even is not as low as Poland on the 20%, it is very
+                                close to the 30%. Can the graph be lower? Is hard to say. Can the data of total
+                                cases that we are seeing correlate to this action? One thing is sure the society
+                                is following what outher countries are doing before the government ordered so
+                                that is a very good sign.
+                            </p>
+                            <img class="post-img img-responsive text-center" src="assets/images/trafficMX.jpg"
+                                alt="">
+                            <p>This is just the beginning of my data. As I mention before I am interested on monitor 
+                                the economic impact but not only measuring GDP growth but other direct variables. 
+                                Bookmark this page so you see the updates. </p>
+
+
+
+                        </div>
+
+                        <div class="post-meta">
+                            <ul class="pull-left list-inline author-meta">
+                                <li class="author">By <a href="#">Netzwerk </a></li>
+                                <li class="date"> On March 29, 2020</li>
+                            </ul>
+                            <ul class="pull-right list-inline social-share">
+                                {{> social}}
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+
+            </div>
+            <div class="col-sm-4">
+                <div class="kotha-sidebar">
+                    <aside class="widget about-me-widget  text-center">
+                        {{> about}}
+                    </aside>
+                    <!--<aside class="widget news-letter-widget">
+						<h2 class="widget-title text-uppercase text-center">Get Newsletter</h2>
+						<form action="#">
+							<input type="email" placeholder="Your email address" required>
+							<input type="submit" value="Subscribe Now"
+							       class="text-uppercase text-center btn btn-subscribe">
+						</form>
+					</aside>-->
+                    <!--<aside class="widget widget-popular-post">
+						{{> popular}}
+					</aside>-->
+                    <!--<aside class="widget latest-post-widget">
+						{{> latest}}
+					</aside>-->
+                    <!--<aside class="widget insta-widget">
+						{{> insta}}
+					</aside>-->
+                    <!--<aside class="widget add-widget">
+						{{> advertisment}}
+						</div>
+					</aside>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
+<script src="/assets/js/corona.js"></script>

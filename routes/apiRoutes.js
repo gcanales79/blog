@@ -1,3 +1,4 @@
+var db = require("../models");
 var Twitter = require('twitter');
 var client = new Twitter({
     consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -5,7 +6,10 @@ var client = new Twitter({
     access_token_key: process.env.TWITTER_ACCESS_TOKEN_KEY,
     access_token_secret: process.env.TWITTER_ACCESS_TOKEN_SECRET
 });
-var db = require("../models");
+
+const Sequelize = require('sequelize');
+const Op = Sequelize.Op;
+const moment = require('moment-timezone');
 
 module.exports = function (app) {
 
@@ -91,6 +95,188 @@ module.exports = function (app) {
                 console.log(err)
             })
     })
+
+    //See if data exist on the Mexico Database
+    app.get("/api/datosMexico/", function (req, res) {
+        db.Mexico.findAll({
+            order: [['fecha', 'DESC']],
+            limit: 1,
+
+
+        }).then(function (dbMexico) {
+            //console.log(dbMexico)
+            res.json(dbMexico)
+        })
+    })
+
+    //See if data exist on the Italy Database
+    app.get("/api/datosItaly", function (req, res) {
+        //let fecha = moment.unix(req.params.fecha).format("YYYY-MM-DD HH:mm:ss")
+        //console.log("La fecha es " + fecha)
+        db.Italy.findAll({
+            order: [['fecha', 'DESC']],
+            limit: 1,
+
+        }).then(function (data) {
+            //console.log(data)
+            res.json(data)
+        })
+    })
+
+    //See if data exist on the Poland Database
+    app.get("/api/datosPoland/", function (req, res) {
+        db.Poland.findAll({
+            order: [['fecha', 'DESC']],
+            limit: 1,
+
+
+        }).then(function (data) {
+            //console.log(data)
+            res.json(data)
+        })
+    })
+
+    //See if data exist on the Spain Database
+    app.get("/api/datosSpain/", function (req, res) {
+        db.Spain.findAll({
+            order: [['fecha', 'DESC']],
+            limit: 1,
+
+
+        }).then(function (data) {
+            //console.log(data)
+            res.json(data)
+        })
+    })
+
+    //Update data that exist on the Spain Database
+    app.put("/api/actualizar/datosSpain/:id", function (req, res) {
+        db.Spain.update({
+            fecha: req.body.fecha,
+            total_cases: req.body.total_cases,
+            new_cases: req.body.new_cases,
+            total_deaths: req.body.total_deaths,
+            new_deaths: req.body.new_deaths,
+            total_recovered: req.body.total_recovered,
+        }, {
+            where: {
+                id: req.params.id,
+            }
+        }
+        ).then(function (data) {
+            //console.log(data)
+            res.json(data)
+        })
+    })
+
+    //Update data that exist on the Mexico Database
+    app.put("/api/actualizar/datosMexico/:id", function (req, res) {
+        db.Mexico.update({
+            fecha: req.body.fecha,
+            total_cases: req.body.total_cases,
+            new_cases: req.body.new_cases,
+            total_deaths: req.body.total_deaths,
+            new_deaths: req.body.new_deaths,
+            total_recovered: req.body.total_recovered,
+        }, {
+            where: {
+                id: req.params.id,
+            }
+        }
+        ).then(function (data) {
+            //console.log(data)
+            res.json(data)
+        })
+    })
+
+    //Update data that exist on the Italy Database
+    app.put("/api/actualizar/datosItaly/:id", function (req, res) {
+        db.Italy.update({
+            fecha: req.body.fecha,
+            total_cases: req.body.total_cases,
+            new_cases: req.body.new_cases,
+            total_deaths: req.body.total_deaths,
+            new_deaths: req.body.new_deaths,
+            total_recovered: req.body.total_recovered,
+        }, {
+            where: {
+                id: req.params.id,
+            }
+        }
+        ).then(function (data) {
+            //console.log(data)
+            res.json(data)
+        })
+    })
+
+    //Update data that exist on the Poland Database
+    app.put("/api/actualizar/datosPoland/:id", function (req, res) {
+        db.Poland.update({
+            fecha: req.body.fecha,
+            total_cases: req.body.total_cases,
+            new_cases: req.body.new_cases,
+            total_deaths: req.body.total_deaths,
+            new_deaths: req.body.new_deaths,
+            total_recovered: req.body.total_recovered,
+        }, {
+            where: {
+                id: req.params.id,
+            }
+        }
+        ).then(function (data) {
+            //console.log(data)
+            res.json(data)
+        })
+    })
+
+    //To obtain all the data after 100th cases
+    app.get("/api/todos/datosSpain", function (req, res) {
+        db.Spain.findAll({
+            order: [['fecha', 'ASC']],
+
+
+        }).then(function (data) {
+            //console.log(data)
+            res.json(data)
+        })
+    })
+
+    //To obtain all the data after 100th cases
+    app.get("/api/todos/datosMexico", function (req, res) {
+        db.Mexico.findAll({
+            order: [['fecha', 'ASC']],
+
+
+        }).then(function (data) {
+            //console.log(data)
+            res.json(data)
+        })
+    })
+
+    //To obtain all the data after 100th cases
+    app.get("/api/todos/datosItaly", function (req, res) {
+        db.Italy.findAll({
+            order: [['fecha', 'ASC']],
+
+
+        }).then(function (data) {
+            //console.log(data)
+            res.json(data)
+        })
+    })
+
+    //To obtain all the data after 100th cases
+    app.get("/api/todos/datosPoland", function (req, res) {
+        db.Poland.findAll({
+            order: [['fecha', 'ASC']],
+
+
+        }).then(function (data) {
+            //console.log(data)
+            res.json(data)
+        })
+    })
+
 
 
 

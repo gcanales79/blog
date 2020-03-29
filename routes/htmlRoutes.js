@@ -33,6 +33,14 @@ module.exports = function (app) {
 
     });
 
+    // Load Data Coronavirus
+    app.get("/datacorona", function (req, res) {
+        res.render("datacorona", {
+            msg: "Welcome!",
+        });
+
+    });
+
      // Cookies
      app.get("/cookies", function (req, res) {
         res.render("cookies", {

@@ -1,8 +1,11 @@
 require('dotenv').config()
 const express = require("express");
 const bodyParser = require("body-parser");
+var cookieParser = require("cookie-parser")
 const exphbs = require('express-handlebars');
+var session = require("express-session");
 var db = require("./models");
+var MemoryStore = require("memorystore")(session)
 
 const app = express();
 
@@ -11,8 +14,23 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
+
 app.use(bodyParser.json());
+
 app.use(express.static("public"));
+app.use(cookieParser('secret'));
+app.use(session({
+  cookie: { maxAge: 86400000 },
+  store: new MemoryStore({
+    checkPeriod: 86400000
+  }),
+  saveUninitialized: true,
+  resave: 'true',
+  httpOnly: "true",
+  sameSite:"true",
+  Secure:"true",
+  secret: 'secret'
+}));
 
 // Handlebars
 app.engine(
@@ -24,11 +42,21 @@ app.engine(
 );
 app.set("view engine", "handlebars");
 
-// Routes
-require("./routes/htmlRoutes")(app);
+// Routes (Primero se debe poner las api)
 require("./routes/apiRoutes")(app);
+require("./routes/htmlRoutes")(app);
+
 
 var syncOptions = { force: false };
+
+// CORS
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept, x-token,");
+  res.header('Access-Control-Allow-Methods', 'PUT, POST, GET, DELETE, OPTIONS');
+  next();
+});
+// END CORS
 
 // If running a test, set syncOptions.force to true
 // clearing the `testdb`
