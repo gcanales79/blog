@@ -163,7 +163,8 @@ $(document).ready(function () {
                     onProgress: function () {
                         $("#loadingGraph").hide()
                     }
-                }
+                },
+                maintainAspectRatio:false,
             }
         })
 

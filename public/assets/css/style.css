@@ -27,6 +27,14 @@ Version: 2.0
   100% { transform: rotate(360deg); }
 }
 
+#graficaCasos {
+  position: relative; 
+  height:40vh; 
+  width:auto;
+}
+
+
+
 body {
   background: #f4f4f4;
   color: #444;
@@ -2996,6 +3004,9 @@ body.food {
 
 /*responsive css */
 @media (min-width: 768px) {
+ 
+
+
   .navbar .navbar-nav {
     margin-right: 25px; }
     .navbar .navbar-nav > li:first-child a {
@@ -3143,6 +3154,11 @@ body.food {
   .archi-feature-category .fa.left {
     left: 0; } }
 @media (max-width: 450px) {
+  #graficaCasos {
+    position: relative; 
+    height:40vh; 
+    width:80vw;
+  }
   .single-blog .post-content .post-meta .social-share, .single-blog .post-content .post-meta .author-meta {
     float: none !important;
     text-align: center;
