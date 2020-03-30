@@ -27,11 +27,11 @@ Version: 2.0
   100% { transform: rotate(360deg); }
 }
 
-#graficaCasos {
+/*#graficaCasos {
   position: relative; 
   height:40vh; 
   width:auto;
-}
+}*/
 
 
 

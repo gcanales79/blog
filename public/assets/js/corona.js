@@ -1,5 +1,7 @@
 $(document).ready(function () {
     let caso = 1;
+    let widthPantalla=$(window).width()
+    console.log("La pantalla mide de width: "+ widthPantalla)
 
     obtenerDatos(caso);
 
@@ -60,6 +62,12 @@ $(document).ready(function () {
     var myChart;
 
     function graficaCasos(casosES, casosIT, casosMX, casosPL) {
+        if(widthPantalla>800){
+            opcionRatio=true;
+        }
+        else{
+            opcionRatio=false;
+        }
         console.log(casosIT)
         let ejeY = []
         for (let i = 0; i < casosIT.length; i++) {
@@ -168,7 +176,7 @@ $(document).ready(function () {
                         $("#loadingGraph").hide()
                     }
                 },
-                maintainAspectRatio: false,
+                maintainAspectRatio: opcionRatio,
             }
         })
 
