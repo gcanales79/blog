@@ -20,7 +20,7 @@ let diffDays = hoy.diff(fecha_inicial, "days")
 
 for (let i = 0; i < countries.length; i++) {
 
-    let fecha_registro = moment(hoy).subtract(1, "days").format("YYYY-MM-DD");
+    let fecha_registro = moment(hoy).subtract(0, "days").format("YYYY-MM-DD");
     //console.log("La fecha de registro " + fecha_registro)
     
     //console.log("La fecha de busqueda es: "+ fecha_busqueda)
