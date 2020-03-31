@@ -1,7 +1,7 @@
 $(document).ready(function () {
     let caso = 1;
-    let widthPantalla=$(window).width()
-    console.log("La pantalla mide de width: "+ widthPantalla)
+    let widthPantalla = $(window).width()
+    //console.log("La pantalla mide de width: " + widthPantalla)
 
     obtenerDatos(caso);
 
@@ -26,6 +26,8 @@ $(document).ready(function () {
             var casosIT = [];
             var casosMX = [];
             var casosPL = [];
+            var deathMX = [];
+            var deathPL = [];
             for (let i = 0; i < datosES[0].length; i++) {
                 casosES.push(datosES[0][i].total_cases);
                 if (i == datosES[0].length - 1) {
@@ -40,12 +42,14 @@ $(document).ready(function () {
             }
             for (let i = 0; i < datosMX[0].length; i++) {
                 casosMX.push(datosMX[0][i].total_cases);
+                deathMX.push(datosMX[0][i].total_deaths);
                 if (i == datosMX[0].length - 1) {
                     //console.log(casosMX)
                 }
             }
             for (let i = 0; i < datosPL[0].length; i++) {
                 casosPL.push(datosPL[0][i].total_cases);
+                deathPL.push(datosPL[0][i].total_deaths);
                 if (i == datosPL[0].length - 1) {
                     //console.log(casosPL)
                 }
@@ -53,6 +57,13 @@ $(document).ready(function () {
 
             graficaCasos(casosES, casosIT, casosMX, casosPL)
             graficaPorcentajes(casosES, casosIT, casosMX, casosPL, caso)
+            google.charts.load('current', { packages: ['corechart', 'line'] });
+            google.charts.setOnLoadCallback(function () {
+                drawBackgroundColor(deathMX)
+            });
+            google.charts.setOnLoadCallback(function () {
+                polandRate(deathPL)
+            });
 
         })
     }
@@ -62,13 +73,13 @@ $(document).ready(function () {
     var myChart;
 
     function graficaCasos(casosES, casosIT, casosMX, casosPL) {
-        if(widthPantalla>800){
-            opcionRatio=true;
+        if (widthPantalla > 800) {
+            opcionRatio = true;
         }
-        else{
-            opcionRatio=false;
+        else {
+            opcionRatio = false;
         }
-        console.log(casosIT)
+        //console.log(casosIT)
         let ejeY = []
         for (let i = 0; i < casosIT.length; i++) {
             if (i % 5 == 0) {
@@ -192,46 +203,46 @@ $(document).ready(function () {
 
         var porcentaje = [];
         var label = "";
-        var colorBarras="";
+        var colorBarras = "";
 
         switch (caso) {
             case 1:
                 label = "Italy"
-                colorBarras="rgb(255,99,132"
+                colorBarras = "rgb(255,99,132"
                 for (let i = 0; i < casosIT.length - 1; i++) {
                     porcentaje.push(((casosIT[i + 1] - casosIT[i]) / casosIT[i] * 100).toFixed(0))
                     if (i == casosIT.length - 2) {
-                        console.log(porcentaje)
+                        //console.log(porcentaje)
                     }
                 }
                 break;
             case 2:
                 for (let i = 0; i < casosES.length - 1; i++) {
                     label = "Spain"
-                    colorBarras="rgba(75, 192, 192"
+                    colorBarras = "rgba(75, 192, 192"
                     porcentaje.push(((casosES[i + 1] - casosES[i]) / casosES[i] * 100).toFixed(0))
                     if (i == casosES.length - 2) {
-                        console.log(porcentaje)
+                        //console.log(porcentaje)
                     }
                 }
                 break;
             case 3:
                 for (let i = 0; i < casosMX.length - 1; i++) {
                     label = "Mexico";
-                    colorBarras="rgba(54, 162, 235"
+                    colorBarras = "rgba(54, 162, 235"
                     porcentaje.push(((casosMX[i + 1] - casosMX[i]) / casosMX[i] * 100).toFixed(0))
                     if (i == casosMX.length - 2) {
-                        console.log(porcentaje)
+                        //console.log(porcentaje)
                     }
                 }
                 break;
             case 4:
                 for (let i = 0; i < casosPL.length - 1; i++) {
                     label = "Poland";
-                    colorBarras="rgb(254,214,0"
+                    colorBarras = "rgb(254,214,0"
                     porcentaje.push(((casosPL[i + 1] - casosPL[i]) / casosPL[i] * 100).toFixed(0))
                     if (i == casosPL.length - 2) {
-                        console.log(porcentaje)
+                        //console.log(porcentaje)
                     }
                 }
                 break;
@@ -259,8 +270,8 @@ $(document).ready(function () {
 
                 datasets: [{
                     label: label,
-                    backgroundColor: colorBarras+",0.2)",
-                    borderColor: colorBarras+",1)",
+                    backgroundColor: colorBarras + ",0.2)",
+                    borderColor: colorBarras + ",1)",
                     borderWidth: 1,
                     data: porcentaje,
                 },
@@ -340,6 +351,96 @@ $(document).ready(function () {
         let caso = 4;
         obtenerDatos(caso)
     })
+
+    //Make google graph of deaths
+
+
+
+    function drawBackgroundColor(deathMX) {
+        //console.log(deathMX)
+        let datosDeath = []
+        for (let i = 0; i < deathMX.length; i++) {
+            datosDeath.push([i, parseInt(deathMX[i])])
+            if (i == deathMX.length - 1) {
+                console.log(datosDeath)
+            }
+        }
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', "Days");
+        data.addColumn('number', 'Mexico');
+
+        data.addRows(datosDeath);
+
+        var options = {
+            hAxis: {
+                title: '# of Days since the 100th Case'
+            },
+            vAxis: {
+                title: 'Total Deaths'
+            },
+            legend: {
+                position: "top"
+            },
+            chartArea: { width: "75%" },
+
+            trendlines: {
+                0: {
+                    type: "exponential",
+                    showR2: true,
+                    visibleInLegend: true,
+                    color: "red",
+                    lineWidth: 10,
+                    opacity: 0.2,
+                }
+            }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById("graficaGoogle"));
+        chart.draw(data, options);
+    }
+
+    function polandRate(deathPL) {
+        //console.log(deathMX)
+        let datosDeath = []
+        for (let i = 0; i < deathPL.length; i++) {
+            datosDeath.push([i, parseInt(deathPL[i])])
+            if (i == deathPL.length - 1) {
+                console.log(datosDeath)
+            }
+        }
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', "Days");
+        data.addColumn('number', 'Poland');
+
+        data.addRows(datosDeath);
+
+        var options = {
+            hAxis: {
+                title: '# of Days since the 100th Case'
+            },
+            vAxis: {
+                title: 'Total Deaths'
+            },
+            legend: {
+                position: "top"
+            },
+            chartArea: { width: "75%" },
+
+            trendlines: {
+                0: {
+                    type: "exponential",
+                    showR2: true,
+                    visibleInLegend: true,
+                    color: "red",
+                    lineWidth: 10,
+                    opacity: 0.2,
+                }
+            }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById("graficaPolonia"));
+        chart.draw(data, options);
+    }
 
 
 
