@@ -22,16 +22,16 @@ for (let i = 0; i < countries.length; i++) {
 
     let fecha_registro = moment(hoy).subtract(0, "days").format("YYYY-MM-DD");
     //console.log("La fecha de registro " + fecha_registro)
-    
-    //console.log("La fecha de busqueda es: "+ fecha_busqueda)
-    
 
-    
+    //console.log("La fecha de busqueda es: "+ fecha_busqueda)
+
+
+
     //console.log("La fecha de registro es " + fecha_registro);
 
     axios({
         "method": "GET",
-        "url": "https://coronavirus-monitor.p.rapidapi.com/coronavirus/history_by_country_and_date.php",
+        "url": "https://coronavirus-monitor.p.rapidapi.com/coronavirus/history_by_particular_country_by_date.php",
         "headers": {
             "content-type": "application/octet-stream",
             "x-rapidapi-host": "coronavirus-monitor.p.rapidapi.com",
@@ -42,41 +42,41 @@ for (let i = 0; i < countries.length; i++) {
         }
     })
         .then((response) => {
-           // console.log(response.data.stat_by_country[response.data.stat_by_country.length - 1]);
+            // console.log(response.data.stat_by_country[response.data.stat_by_country.length - 1]);
             //console.log(moment(response.data.stat_by_country[response.data.stat_by_country.length - 1].record_date).format("YYYY-MM-DD"))
             var url = process.env.url;
             //console.log(url)
             //let buscarFecha=moment(fecha_registro).format("X")
-            let datosNuevos=response;
-            let numeroDato=i;
-            axios.get(url+"/api/datos"+ countries[i], {
+            let datosNuevos = response;
+            let numeroDato = i;
+            axios.get(url + "/api/datos" + countries[i], {
 
-            }).then((response)=>{
-               console.log(response.data[0].id)
-               let ultimaFecha=moment(response.data[0].fecha).format("YYYY-MM-DD");
-               let id=response.data[0].id;
-                if(fecha_registro===ultimaFecha){
+            }).then((response) => {
+                console.log(response.data[0].id)
+                let ultimaFecha = moment(response.data[0].fecha).format("YYYY-MM-DD");
+                let id = response.data[0].id;
+                if (fecha_registro === ultimaFecha) {
                     console.log("Son iguales")
-                    actualizarDatos(datosNuevos,numeroDato,url,id)
+                    actualizarDatos(datosNuevos, numeroDato, url, id)
                 }
-                else{
+                else {
                     console.log("No son iguales")
-                    guardarDatos(datosNuevos,numeroDato,url,countries[i])
+                    guardarDatos(datosNuevos, numeroDato, url, countries[i])
                 }
             })
-            .catch((err)=>{
-                console.log(err)
-            })
-            
-            
+                .catch((err) => {
+                    console.log(err)
+                })
+
+
         })
         .catch((error) => {
             console.log(error)
         })
 }
 
-function guardarDatos(response,i,url) {
-    axios.post(url+"/datos" + countries[i], {
+function guardarDatos(response, i, url) {
+    axios.post(url + "/datos" + countries[i], {
         fecha: moment(response.data.stat_by_country[response.data.stat_by_country.length - 1].record_date).format("YYYY-MM-DD"),
         total_cases: (response.data.stat_by_country[response.data.stat_by_country.length - 1].total_cases).replace(/,/g, ''),
         new_cases: (response.data.stat_by_country[response.data.stat_by_country.length - 1].new_cases).replace(/,/g, ''),
@@ -93,8 +93,8 @@ function guardarDatos(response,i,url) {
         })
 }
 
-function actualizarDatos(response,i,url,id) {
-    axios.put(url+"/api/actualizar/datos" + countries[i]+"/"+id, {
+function actualizarDatos(response, i, url, id) {
+    axios.put(url + "/api/actualizar/datos" + countries[i] + "/" + id, {
         fecha: moment(response.data.stat_by_country[response.data.stat_by_country.length - 1].record_date).format("YYYY-MM-DD"),
         total_cases: (response.data.stat_by_country[response.data.stat_by_country.length - 1].total_cases).replace(/,/g, ''),
         new_cases: (response.data.stat_by_country[response.data.stat_by_country.length - 1].new_cases).replace(/,/g, ''),
