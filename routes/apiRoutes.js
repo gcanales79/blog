@@ -277,6 +277,58 @@ module.exports = function (app) {
         })
     })
 
+    //Get id of certain date Poland Database
+    app.get("/api/datosPoland/:date", function (req, res) {
+        let fecha = moment.utc(req.params.date + "T01:00:00").format("YYYY-MM-DD HH:mm:ss")
+        db.Poland.findAll({
+            where: {
+                fecha: fecha
+            }
+        }).then(function (data) {
+            //console.log(data)
+            res.json(data)
+        })
+    })
+
+    //Get id of certain date Italy Database
+    app.get("/api/datosItaly/:date", function (req, res) {
+        let fecha = moment.utc(req.params.date + "T01:00:00").format("YYYY-MM-DD HH:mm:ss")
+        db.Italy.findAll({
+            where: {
+                fecha: fecha
+            }
+        }).then(function (data) {
+            //console.log(data)
+            res.json(data)
+        })
+    })
+
+    //Get id of certain date Spain Database
+    app.get("/api/datosSpain/:date", function (req, res) {
+        let fecha = moment.utc(req.params.date + "T01:00:00").format("YYYY-MM-DD HH:mm:ss")
+        db.Spain.findAll({
+            where: {
+                fecha: fecha
+            }
+        }).then(function (data) {
+            //console.log(data)
+            res.json(data)
+        })
+    })
+
+    //Get id of certain date Mexico Database
+    app.get("/api/datosMexico/:date", function (req, res) {
+        let fecha = moment.utc(req.params.date + "T01:00:00").format("YYYY-MM-DD HH:mm:ss")
+        db.Mexico.findAll({
+            where: {
+                fecha: fecha
+            }
+        }).then(function (data) {
+            //console.log(data)
+            res.json(data)
+        })
+    })
+
 
 
 
