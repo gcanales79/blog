@@ -318,7 +318,7 @@ module.exports = function (app) {
 
     //Get id of certain date Mexico Database
     app.get("/api/datosMexico/:date", function (req, res) {
-        let fecha = moment.utc(req.params.date + "T01:00:00").format("YYYY-MM-DD HH:mm:ss")
+        let fecha = moment.utc(req.params.date + "T00:00:00").format("YYYY-MM-DD HH:mm:ss")
         db.Mexico.findAll({
             where: {
                 fecha: fecha
