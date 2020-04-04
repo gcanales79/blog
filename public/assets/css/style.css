@@ -36,7 +36,7 @@ Version: 2.0
 
 
 body {
-  background: #f4f4f4;
+  background: #ffffff;
   color: #444;
   font-family: "Lato", sans-serif;
   font-size: 15px;
@@ -804,7 +804,7 @@ select:focus, select:active, input:focus, input:active, textarea:focus, textarea
     width: 200px;
     padding: 10px 13px;
     border-radius: 0;
-    background: #f4f4f4;
+    background: #ffffff;
     font-weight: 300;
     box-shadow: 0 5px 4px -4px rgba(190, 190, 190, 0.1);
     border: 1px solid #e8e8e8; }
@@ -910,7 +910,7 @@ select:focus, select:active, input:focus, input:active, textarea:focus, textarea
     padding: 28px 0 16px; }
 
 footer {
-  background: #333333;
+  background: #000000;
   color: #fff; }
   footer .footer-widget-row {
     display: flex;
