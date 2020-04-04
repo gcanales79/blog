@@ -7,7 +7,7 @@ var fecha_inicial = moment("2020-03-17")
 
 
 
-var hoy = "2020-03-29";
+var hoy = "2020-03-30";
 //console.log("Hoy es " + hoy)
 //console.log(today);
 
@@ -55,14 +55,14 @@ for (let i = 0; i < countries.length; i++) {
                 console.log("El id es " + response.data[0].id + " de " + countries[i])
                 let ultimaFecha = moment(response.data[0].fecha).format("YYYY-MM-DD");
                 let id = response.data[0].id;
-                /*if (fecha_registro === ultimaFecha) {
+                if (fecha_registro === ultimaFecha) {
                     console.log("Son iguales")
                     actualizarDatos(datosNuevos, numeroDato, url, id)
                 }
                 else {
                     console.log("No son iguales")
                     guardarDatos(datosNuevos, numeroDato, url, countries[i])
-                }*/
+                }
             })
                 .catch((err) => {
                     console.log(err)
