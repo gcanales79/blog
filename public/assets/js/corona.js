@@ -28,6 +28,10 @@ $(document).ready(function () {
             var casosPL = [];
             var deathMX = [];
             var deathPL = [];
+            var newcasosMX = [];
+            var newdeathsMX = [];
+            var newcasosPL = [];
+            var newdeathsPL = [];
             for (let i = 0; i < datosES[0].length; i++) {
                 casosES.push(datosES[0][i].total_cases);
                 if (i == datosES[0].length - 1) {
@@ -43,6 +47,9 @@ $(document).ready(function () {
             for (let i = 0; i < datosMX[0].length; i++) {
                 casosMX.push(datosMX[0][i].total_cases);
                 deathMX.push(datosMX[0][i].total_deaths);
+                newcasosMX.push(datosMX[0][i].new_cases);
+                newdeathsMX.push(datosMX[0][i].new_deaths);
+
                 if (i == datosMX[0].length - 1) {
                     //console.log(casosMX)
                 }
@@ -50,6 +57,8 @@ $(document).ready(function () {
             for (let i = 0; i < datosPL[0].length; i++) {
                 casosPL.push(datosPL[0][i].total_cases);
                 deathPL.push(datosPL[0][i].total_deaths);
+                newcasosPL.push(datosPL[0][i].new_cases);
+                newdeathsPL.push(datosPL[0][i].new_deaths);
                 if (i == datosPL[0].length - 1) {
                     //console.log(casosPL)
                 }
@@ -63,6 +72,10 @@ $(document).ready(function () {
             });
             google.charts.setOnLoadCallback(function () {
                 polandRate(deathPL)
+                newCasesMXavg(newcasosMX)
+                newDeathsMXavg(newdeathsMX)
+                newCasesPLavg(newcasosPL)
+                newDeathsPLavg(newdeathsPL)
             });
 
         })
@@ -362,7 +375,7 @@ $(document).ready(function () {
         for (let i = 0; i < deathMX.length; i++) {
             datosDeath.push([i, parseInt(deathMX[i])])
             if (i == deathMX.length - 1) {
-                console.log(datosDeath)
+                //console.log(datosDeath)
             }
         }
         var data = new google.visualization.DataTable();
@@ -405,7 +418,7 @@ $(document).ready(function () {
         for (let i = 0; i < deathPL.length; i++) {
             datosDeath.push([i, parseInt(deathPL[i])])
             if (i == deathPL.length - 1) {
-                console.log(datosDeath)
+                // console.log(datosDeath)
             }
         }
         var data = new google.visualization.DataTable();
@@ -439,6 +452,186 @@ $(document).ready(function () {
         };
 
         var chart = new google.visualization.LineChart(document.getElementById("graficaPolonia"));
+        chart.draw(data, options);
+    }
+
+    //New cases daily Mov-Avg
+
+    function newCasesMXavg(newcasos) {
+        //console.log(deathMX)
+        let newcasosNum = []
+        for (let i = 0; i < newcasos.length; i++) {
+            newcasosNum.push(parseInt(newcasos[i]))
+            if (i == newcasos.length - 1) {
+                //console.log(newcasosNum)
+            }
+        }
+        let movavg = []
+        for (let i = 0; i < newcasosNum.length - 2; i++) {
+            movavg.push([i, (newcasosNum[i] + newcasosNum[i + 1] + newcasosNum[i + 2]) / 3])
+            if (i == newcasosNum.length - 3) {
+                console.log(movavg)
+            }
+        }
+
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', "Days");
+        data.addColumn('number', 'Mexico');
+
+        data.addRows(movavg);
+
+        var options = {
+            hAxis: {
+                title: '# of Days since the 100th Case'
+            },
+            vAxis: {
+                title: 'New Cases on a 3 day Moving Average'
+            },
+            legend: {
+                position: "top"
+            },
+            chartArea: { width: "75%" },
+
+
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById("graficaNuevoscasosMX"));
+        chart.draw(data, options);
+    }
+
+    //New deaths daily Mov-Avg
+
+    function newDeathsMXavg(newcasos) {
+        //console.log(deathMX)
+        let newcasosNum = []
+        for (let i = 0; i < newcasos.length; i++) {
+            newcasosNum.push(parseInt(newcasos[i]))
+            if (i == newcasos.length - 1) {
+                //console.log(newcasosNum)
+            }
+        }
+        let movavg = []
+        for (let i = 0; i < newcasosNum.length - 2; i++) {
+            movavg.push([i, (newcasosNum[i] + newcasosNum[i + 1] + newcasosNum[i + 2]) / 3])
+            if (i == newcasosNum.length - 3) {
+                console.log(movavg)
+            }
+        }
+
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', "Days");
+        data.addColumn('number', 'Mexico');
+
+        data.addRows(movavg);
+
+        var options = {
+            hAxis: {
+                title: '# of Days since the 100th Case'
+            },
+            vAxis: {
+                title: 'New Deaths on a 3 day Moving Average'
+            },
+            legend: {
+                position: "top"
+            },
+            chartArea: { width: "75%" },
+
+
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById("graficaNuevosdeathsMX"));
+        chart.draw(data, options);
+    }
+
+    //New cases daily Mov-Avg Poland
+
+    function newCasesPLavg(newcasos) {
+        //console.log(deathMX)
+        let newcasosNum = []
+        for (let i = 0; i < newcasos.length; i++) {
+            newcasosNum.push(parseInt(newcasos[i]))
+            if (i == newcasos.length - 1) {
+                //console.log(newcasosNum)
+            }
+        }
+        let movavg = []
+        for (let i = 0; i < newcasosNum.length - 2; i++) {
+            movavg.push([i, (newcasosNum[i] + newcasosNum[i + 1] + newcasosNum[i + 2]) / 3])
+            if (i == newcasosNum.length - 3) {
+                console.log(movavg)
+            }
+        }
+
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', "Days");
+        data.addColumn('number', 'Poland');
+
+        data.addRows(movavg);
+
+        var options = {
+            hAxis: {
+                title: '# of Days since the 100th Case'
+            },
+            vAxis: {
+                title: 'New Cases on a 3 day Moving Average'
+            },
+            legend: {
+                position: "top"
+            },
+            chartArea: { width: "75%" },
+
+
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById("graficaNuevoscasosPL"));
+        chart.draw(data, options);
+    }
+
+    //New deaths daily Mov-Avg Poland
+
+    function newDeathsPLavg(newcasos) {
+        //console.log(deathMX)
+        let newcasosNum = []
+        for (let i = 0; i < newcasos.length; i++) {
+            newcasosNum.push(parseInt(newcasos[i]))
+            if (i == newcasos.length - 1) {
+                //console.log(newcasosNum)
+            }
+        }
+        let movavg = []
+        for (let i = 0; i < newcasosNum.length - 2; i++) {
+            movavg.push([i, (newcasosNum[i] + newcasosNum[i + 1] + newcasosNum[i + 2]) / 3])
+            if (i == newcasosNum.length - 3) {
+                console.log(movavg)
+            }
+        }
+
+
+        var data = new google.visualization.DataTable();
+        data.addColumn('number', "Days");
+        data.addColumn('number', 'Poland');
+
+        data.addRows(movavg);
+
+        var options = {
+            hAxis: {
+                title: '# of Days since the 100th Case'
+            },
+            vAxis: {
+                title: 'New Deaths on a 3 day Moving Average'
+            },
+            legend: {
+                position: "top"
+            },
+            chartArea: { width: "75%" },
+
+
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById("graficaNuevosdeathsPL"));
         chart.draw(data, options);
     }
 
