@@ -486,7 +486,7 @@ $(document).ready(function () {
                 title: '# of Days since the 100th Case'
             },
             vAxis: {
-                title: 'New Cases on a 3 day Moving Average'
+                title: 'New Cases per Day (3 Day Rolling Average)'
             },
             legend: {
                 position: "top"
@@ -531,7 +531,7 @@ $(document).ready(function () {
                 title: '# of Days since the 100th Case'
             },
             vAxis: {
-                title: 'New Deaths on a 3 day Moving Average'
+                title: 'New Deaths per Day (3 Day Rolling Average)'
             },
             legend: {
                 position: "top"
@@ -576,7 +576,7 @@ $(document).ready(function () {
                 title: '# of Days since the 100th Case'
             },
             vAxis: {
-                title: 'New Cases on a 3 day Moving Average'
+                title: 'New Cases per Day (3 Day Rolling Average)'
             },
             legend: {
                 position: "top"
@@ -621,7 +621,7 @@ $(document).ready(function () {
                 title: '# of Days since the 100th Case'
             },
             vAxis: {
-                title: 'New Deaths on a 3 day Moving Average'
+                title: 'New Deaths per Day (3 Day Rolling Average)'
             },
             legend: {
                 position: "top"
