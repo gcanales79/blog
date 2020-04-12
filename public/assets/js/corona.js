@@ -468,7 +468,7 @@ $(document).ready(function () {
         }
         let movavg = []
         for (let i = 0; i < newcasosNum.length - 6; i++) {
-            movavg.push([i, (newcasosNum[i] + newcasosNum[i + 1] + newcasosNum[i + 2] + newcasosNum(i + 3) + newcasosNum(i + 4) + newcasosNum(i + 5) + newcasosNum(i + 6) + newcasosNum(i + 7)) / 7])
+            movavg.push([i, (newcasosNum[i] + newcasosNum[i + 1] + newcasosNum[i + 2] + newcasosNum[i + 3] + newcasosNum[i + 4] + newcasosNum[i + 5] + newcasosNum[i + 6] + newcasosNum[i + 7]) / 7])
             if (i == newcasosNum.length - 7) {
                 console.log(movavg)
             }
@@ -513,7 +513,7 @@ $(document).ready(function () {
         }
         let movavg = []
         for (let i = 0; i < newcasosNum.length - 6; i++) {
-            movavg.push([i, (newcasosNum[i] + newcasosNum[i + 1] + newcasosNum[i + 2] + newcasosNum(i + 3) + newcasosNum(i + 4) + newcasosNum(i + 5) + newcasosNum(i + 6) + newcasosNum(i + 7)) / 7])
+            movavg.push([i, (newcasosNum[i] + newcasosNum[i + 1] + newcasosNum[i + 2] + newcasosNum[i + 3] + newcasosNum[i + 4] + newcasosNum[i + 5] + newcasosNum[i + 6] + newcasosNum[i + 7]) / 7])
             if (i == newcasosNum.length - 7) {
                 console.log(movavg)
             }
@@ -558,7 +558,7 @@ $(document).ready(function () {
         }
         let movavg = []
         for (let i = 0; i < newcasosNum.length - 6; i++) {
-            movavg.push([i, (newcasosNum[i] + newcasosNum[i + 1] + newcasosNum[i + 2] + newcasosNum(i + 3) + newcasosNum(i + 4) + newcasosNum(i + 5) + newcasosNum(i + 6) + newcasosNum(i + 7)) / 7])
+            movavg.push([i, (newcasosNum[i] + newcasosNum[i + 1] + newcasosNum[i + 2] + newcasosNum[i + 3] + newcasosNum[i + 4] + newcasosNum[i + 5] + newcasosNum[i + 6] + newcasosNum[i + 7]) / 7])
             if (i == newcasosNum.length - 7) {
                 console.log(movavg)
             }
@@ -603,7 +603,7 @@ $(document).ready(function () {
         }
         let movavg = []
         for (let i = 0; i < newcasosNum.length - 6; i++) {
-            movavg.push([i, (newcasosNum[i] + newcasosNum[i + 1] + newcasosNum[i + 2] + newcasosNum(i + 3) + newcasosNum(i + 4) + newcasosNum(i + 5) + newcasosNum(i + 6) + newcasosNum(i + 7)) / 7])
+            movavg.push([i, (newcasosNum[i] + newcasosNum[i + 1] + newcasosNum[i + 2] + newcasosNum[i + 3] + newcasosNum[i + 4] + newcasosNum[i + 5] + newcasosNum[i + 6] + newcasosNum[i + 7]) / 7])
             if (i == newcasosNum.length - 7) {
                 console.log(movavg)
             }
