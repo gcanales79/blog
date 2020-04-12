@@ -467,9 +467,9 @@ $(document).ready(function () {
             }
         }
         let movavg = []
-        for (let i = 0; i < newcasosNum.length - 2; i++) {
-            movavg.push([i, (newcasosNum[i] + newcasosNum[i + 1] + newcasosNum[i + 2]) / 3])
-            if (i == newcasosNum.length - 3) {
+        for (let i = 0; i < newcasosNum.length - 6; i++) {
+            movavg.push([i, (newcasosNum[i] + newcasosNum[i + 1] + newcasosNum[i + 2] + newcasos(i + 3) + newcasos(i + 4) + newcasos(i + 5) + newcasos(i + 6) + newcasos(i + 7)) / 7])
+            if (i == newcasosNum.length - 7) {
                 console.log(movavg)
             }
         }
@@ -486,7 +486,7 @@ $(document).ready(function () {
                 title: '# of Days since the 100th Case'
             },
             vAxis: {
-                title: 'New Cases per Day (3 Day Rolling Average)'
+                title: 'New Cases per Day (7 Day Rolling Average)'
             },
             legend: {
                 position: "top"
@@ -512,9 +512,9 @@ $(document).ready(function () {
             }
         }
         let movavg = []
-        for (let i = 0; i < newcasosNum.length - 2; i++) {
-            movavg.push([i, (newcasosNum[i] + newcasosNum[i + 1] + newcasosNum[i + 2]) / 3])
-            if (i == newcasosNum.length - 3) {
+        for (let i = 0; i < newcasosNum.length - 6; i++) {
+            movavg.push([i, (newcasosNum[i] + newcasosNum[i + 1] + newcasosNum[i + 2] + newcasos(i + 3) + newcasos(i + 4) + newcasos(i + 5) + newcasos(i + 6) + newcasos(i + 7)) / 7])
+            if (i == newcasosNum.length - 7) {
                 console.log(movavg)
             }
         }
@@ -531,7 +531,7 @@ $(document).ready(function () {
                 title: '# of Days since the 100th Case'
             },
             vAxis: {
-                title: 'New Deaths per Day (3 Day Rolling Average)'
+                title: 'New Deaths per Day (7 Day Rolling Average)'
             },
             legend: {
                 position: "top"
@@ -557,9 +557,9 @@ $(document).ready(function () {
             }
         }
         let movavg = []
-        for (let i = 0; i < newcasosNum.length - 2; i++) {
-            movavg.push([i, (newcasosNum[i] + newcasosNum[i + 1] + newcasosNum[i + 2]) / 3])
-            if (i == newcasosNum.length - 3) {
+        for (let i = 0; i < newcasosNum.length - 6; i++) {
+            movavg.push([i, (newcasosNum[i] + newcasosNum[i + 1] + newcasosNum[i + 2] + newcasos(i + 3) + newcasos(i + 4) + newcasos(i + 5) + newcasos(i + 6) + newcasos(i + 7)) / 7])
+            if (i == newcasosNum.length - 7) {
                 console.log(movavg)
             }
         }
@@ -576,7 +576,7 @@ $(document).ready(function () {
                 title: '# of Days since the 100th Case'
             },
             vAxis: {
-                title: 'New Cases per Day (3 Day Rolling Average)'
+                title: 'New Cases per Day (7 Day Rolling Average)'
             },
             legend: {
                 position: "top"
@@ -602,9 +602,9 @@ $(document).ready(function () {
             }
         }
         let movavg = []
-        for (let i = 0; i < newcasosNum.length - 2; i++) {
-            movavg.push([i, (newcasosNum[i] + newcasosNum[i + 1] + newcasosNum[i + 2]) / 3])
-            if (i == newcasosNum.length - 3) {
+        for (let i = 0; i < newcasosNum.length - 6; i++) {
+            movavg.push([i, (newcasosNum[i] + newcasosNum[i + 1] + newcasosNum[i + 2] + newcasos(i + 3) + newcasos(i + 4) + newcasos(i + 5) + newcasos(i + 6) + newcasos(i + 7)) / 7])
+            if (i == newcasosNum.length - 7) {
                 console.log(movavg)
             }
         }
@@ -621,7 +621,7 @@ $(document).ready(function () {
                 title: '# of Days since the 100th Case'
             },
             vAxis: {
-                title: 'New Deaths per Day (3 Day Rolling Average)'
+                title: 'New Deaths per Day (7 Day Rolling Average)'
             },
             legend: {
                 position: "top"
