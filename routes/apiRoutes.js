@@ -16,7 +16,7 @@ module.exports = function (app) {
     app.post("/tweets", (req, res) => {
         //console.log("hola2")
         const params = { count: 3 };
-        client.get("/statuses/home_timeline", params)
+        client.get("/statuses/user_timeline", params)
             .then((tweet) => {
                 //console.log(tweet)
                 res.send(tweet)
