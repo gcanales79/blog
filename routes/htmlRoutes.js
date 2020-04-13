@@ -34,7 +34,7 @@ module.exports = function (app) {
     });
 
     // Load Data Coronavirus
-    app.get("/datacorona", function (req, res) {
+    app.get("/data-coronavirus-poland-and-mexico", function (req, res) {
         res.render("datacorona", {
             msg: "Welcome!",
         });
