@@ -41,6 +41,14 @@ module.exports = function (app) {
 
     });
 
+     // Load Grill Part 1
+     app.get("/steak-at-poland", function (req, res) {
+        res.render("steak", {
+            msg: "Welcome!",
+        });
+
+    });
+
      // Cookies
      app.get("/cookies", function (req, res) {
         res.render("cookies", {
