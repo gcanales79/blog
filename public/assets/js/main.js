@@ -1,6 +1,7 @@
 
 
 $(document).ready(function () {
+  
     "use strict";
     /* === Footer Instagram === */
     (function () {
@@ -211,11 +212,11 @@ $(document).ready(function () {
                 let datos = data[i].text
                 let tweet = datos.split("https")
                 //console.log(data[i].created_at)
-                let fechaTweet=moment(data[i].created_at,"ddd MMM DD HH:mm:ss ZZ YYYY")
-                let now=moment()
+                let fechaTweet = moment(data[i].created_at, "ddd MMM DD HH:mm:ss ZZ YYYY")
+                let now = moment()
                 //console.log(now)
                 //console.log((fechaTweet))
-                let diasTweet=now.diff(fechaTweet,"days")
+                let diasTweet = now.diff(fechaTweet, "days")
                 //console.log(diasTweet)
                 //console.log(tweet)
                 let tweetText = tweet[0];
@@ -226,7 +227,7 @@ $(document).ready(function () {
                 //if (typeof(data[i].entities.media) != "undefined") {
                 //console.log(data[i].entities.media[0].url)
                 //}
-                
+
                 let newDiv = $("<div>")
                 newDiv.attr("class", "single-tweet")
                 let newP = $("<p>")
@@ -237,7 +238,7 @@ $(document).ready(function () {
                 let newSpace = $("<br>")
                 let logo = $("<i>")
                 logo.attr("class", "fa fa-twitter")
-                let newh4=$("<h4>")
+                let newh4 = $("<h4>")
                 newh4.text("Tweeted on " + diasTweet + " days ago.")
                 newh4.prepend(logo)
                 newP.append(newSpace)
