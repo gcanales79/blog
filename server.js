@@ -7,16 +7,17 @@ var session = require("express-session");
 var db = require("./models");
 var MemoryStore = require("memorystore")(session)
 const webpush=require("web-push")
+const morgan=require("morgan")
+
 
 const app = express();
 
 const PORT = process.env.PORT || 3000;
 
 
-
-
 // Middleware
 app.use(bodyParser.urlencoded({ extended: false }));
+app.use(morgan("dev"))
 
 app.use(bodyParser.json());
 
@@ -46,8 +47,10 @@ app.engine(
 app.set("view engine", "handlebars");
 
 // Routes (Primero se debe poner las api)
+//app.use(require("./routes/index"))
 require("./routes/apiRoutes")(app);
 require("./routes/htmlRoutes")(app);
+
 
 
 var syncOptions = { force: false };

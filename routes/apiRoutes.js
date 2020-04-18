@@ -11,6 +11,10 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const moment = require('moment-timezone');
 
+const webpush = require("../webpush");
+
+let pushSubscription;
+
 module.exports = function (app) {
 
     app.post("/tweets", (req, res) => {
@@ -329,7 +333,33 @@ module.exports = function (app) {
         })
     })
 
- 
+    //Subscription Push
+    app.post("/subscription", async (req, res) => {
+        //console.log(req.body);
+        pushSubscription = req.body;
+        //console.log(pushSubscription)
+        //console.log(pushSubscription.subscription.endpoint)
+        res.status(200).json();
+
+    })
+
+    //New Push Notifications
+    app.post("/new-message", async (req, res) => {
+        const payload = JSON.stringify({
+            title: req.body.title,
+            message: req.body.message,
+            url:"https://www.bitesoftheworld.mx"
+        })
+        try {
+            await webpush.sendNotification(pushSubscription.subscription, payload);
+        }
+        catch (error) {
+            console.log(error)
+        }
+        res.status(200).json()
+    })
+
+
 
 
 
