@@ -1,7 +1,9 @@
 
 
 $(document).ready(function () {
-    const PUBLIC_VAPID_KEY = "BFcjk8hLF756Vzzw8VWPy2RzjD-OcLiMglaOcgoE2RWuM07lKQoolmT9vIyq8jCEIJvQUBqp3LOWscQLvwlMS68"
+
+
+    /*const PUBLIC_VAPID_KEY = "BFcjk8hLF756Vzzw8VWPy2RzjD-OcLiMglaOcgoE2RWuM07lKQoolmT9vIyq8jCEIJvQUBqp3LOWscQLvwlMS68"
 
     const subscription = async () => {
 
@@ -41,7 +43,7 @@ $(document).ready(function () {
         return outputArray;
     }
 
-    subscription();
+    subscription();*/
 
 
     "use strict";

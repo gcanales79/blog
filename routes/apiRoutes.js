@@ -333,6 +333,7 @@ module.exports = function (app) {
         })
     })
 
+    /*
     //Subscription Push
     app.post("/subscription", async (req, res) => {
         //console.log(req.body);
@@ -358,6 +359,7 @@ module.exports = function (app) {
         }
         res.status(200).json()
     })
+    */
 
 
 
