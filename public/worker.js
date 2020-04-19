@@ -1,4 +1,4 @@
-console.log("Service Worker")
+/*console.log("Service Worker")
 
 self.addEventListener("push",e=>{
     const data=e.data.json();
@@ -32,4 +32,4 @@ self.addEventListener('notificationclick', function(event) {
             }
         })
     );
-});
+});*/

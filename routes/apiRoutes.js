@@ -11,7 +11,7 @@ const Sequelize = require('sequelize');
 const Op = Sequelize.Op;
 const moment = require('moment-timezone');
 
-const webpush = require("../webpush");
+/*const webpush = require("../webpush");*/
 
 let pushSubscription;
 
