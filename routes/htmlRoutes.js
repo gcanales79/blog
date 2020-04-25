@@ -49,6 +49,15 @@ module.exports = function (app) {
 
     });
 
+    //Load Online Cooking
+
+    app.get("/online-classes-during-lockdown", function (req, res) {
+        res.render("ulala", {
+            msg: "Welcome!",
+        });
+
+    });
+
      // Cookies
      app.get("/cookies", function (req, res) {
         res.render("cookies", {

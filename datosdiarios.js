@@ -35,7 +35,7 @@ for (let i = 0; i < countries.length; i++) {
         "headers": {
             "content-type": "application/octet-stream",
             "x-rapidapi-host": "coronavirus-monitor.p.rapidapi.com",
-            "x-rapidapi-key": "874b6ea923mshd7377a4cd4343e0p1a39c7jsn23e8edc291e0"
+            "x-rapidapi-key": process.env.RAPID_API_KEY,
         }, "params": {
             "country": countries[i],
             "date": fecha_registro
