@@ -83,6 +83,8 @@ function guardarDatos(response, i, url) {
         total_deaths: (response.data.stat_by_country[response.data.stat_by_country.length - 1].total_deaths).replace(/,/g, ''),
         new_deaths: (response.data.stat_by_country[response.data.stat_by_country.length - 1].new_deaths).replace(/,/g, ''),
         total_recovered: (response.data.stat_by_country[response.data.stat_by_country.length - 1].total_recovered).replace(/,/g, ''),
+        total_tests: (response.data.stat_by_country[response.data.stat_by_country.length - 1].total_tests).replace(/,/g, ''),
+        total_tests_per1m: (response.data.stat_by_country[response.data.stat_by_country.length - 1].total_tests_per1m).replace(/,/g, ''),
     })
         .then((response) => {
             //console.log("Los datos son:")
@@ -101,6 +103,8 @@ function actualizarDatos(response, i, url, id) {
         total_deaths: (response.data.stat_by_country[response.data.stat_by_country.length - 1].total_deaths).replace(/,/g, ''),
         new_deaths: (response.data.stat_by_country[response.data.stat_by_country.length - 1].new_deaths).replace(/,/g, ''),
         total_recovered: (response.data.stat_by_country[response.data.stat_by_country.length - 1].total_recovered).replace(/,/g, ''),
+        total_tests: (response.data.stat_by_country[response.data.stat_by_country.length - 1].total_tests).replace(/,/g, ''),
+        total_tests_per1m: (response.data.stat_by_country[response.data.stat_by_country.length - 1].total_tests_per1m).replace(/,/g, ''),
     })
         .then((response) => {
             //console.log("Los datos son:")

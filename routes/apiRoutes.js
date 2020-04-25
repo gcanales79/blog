@@ -45,6 +45,8 @@ module.exports = function (app) {
             total_deaths: req.body.total_deaths,
             new_deaths: req.body.new_deaths,
             total_recovered: req.body.total_recovered,
+            total_tests:req.body.total_tests,
+            total_tests_per1m:req.body.total_tests_per1m,
         }).then((dbPoland) =>
             res.json(dbPoland))
             .catch((err) => {
@@ -61,6 +63,8 @@ module.exports = function (app) {
             total_deaths: req.body.total_deaths,
             new_deaths: req.body.new_deaths,
             total_recovered: req.body.total_recovered,
+            total_tests:req.body.total_tests,
+            total_tests_per1m:req.body.total_tests_per1m,
         }).then((dbItaly) =>
             res.json(dbItaly))
             .catch((err) => {
@@ -77,6 +81,8 @@ module.exports = function (app) {
             total_deaths: req.body.total_deaths,
             new_deaths: req.body.new_deaths,
             total_recovered: req.body.total_recovered,
+            total_tests:req.body.total_tests,
+            total_tests_per1m:req.body.total_tests_per1m,
         }).then((dbMexico) =>
             res.json(dbMexico))
             .catch((err) => {
@@ -93,6 +99,8 @@ module.exports = function (app) {
             total_deaths: req.body.total_deaths,
             new_deaths: req.body.new_deaths,
             total_recovered: req.body.total_recovered,
+            total_tests:req.body.total_tests,
+            total_tests_per1m:req.body.total_tests_per1m,
         }).then((dbSpain) =>
             res.json(dbSpain))
             .catch((err) => {
@@ -162,6 +170,8 @@ module.exports = function (app) {
             total_deaths: req.body.total_deaths,
             new_deaths: req.body.new_deaths,
             total_recovered: req.body.total_recovered,
+            total_tests:req.body.total_tests,
+            total_tests_per1m:req.body.total_tests_per1m,
         }, {
             where: {
                 id: req.params.id,
@@ -182,6 +192,8 @@ module.exports = function (app) {
             total_deaths: req.body.total_deaths,
             new_deaths: req.body.new_deaths,
             total_recovered: req.body.total_recovered,
+            total_tests:req.body.total_tests,
+            total_tests_per1m:req.body.total_tests_per1m,
         }, {
             where: {
                 id: req.params.id,
@@ -202,6 +214,8 @@ module.exports = function (app) {
             total_deaths: req.body.total_deaths,
             new_deaths: req.body.new_deaths,
             total_recovered: req.body.total_recovered,
+            total_tests:req.body.total_tests,
+            total_tests_per1m:req.body.total_tests_per1m,
         }, {
             where: {
                 id: req.params.id,
@@ -222,6 +236,8 @@ module.exports = function (app) {
             total_deaths: req.body.total_deaths,
             new_deaths: req.body.new_deaths,
             total_recovered: req.body.total_recovered,
+            total_tests:req.body.total_tests,
+            total_tests_per1m:req.body.total_tests_per1m,
         }, {
             where: {
                 id: req.params.id,
@@ -281,9 +297,9 @@ module.exports = function (app) {
         })
     })
 
-    //Get id of certain date Poland Database
+    //Get id of certain date Poland Database For Local T=02
     app.get("/api/datosPoland/:date", function (req, res) {
-        let fecha = moment.utc(req.params.date + "T00:00:00").format("YYYY-MM-DD HH:mm:ss")
+        let fecha = moment.utc(req.params.date + "T02:00:00").format("YYYY-MM-DD HH:mm:ss")
         db.Poland.findAll({
             where: {
                 fecha: fecha
@@ -296,7 +312,7 @@ module.exports = function (app) {
 
     //Get id of certain date Italy Database
     app.get("/api/datosItaly/:date", function (req, res) {
-        let fecha = moment.utc(req.params.date + "T00:00:00").format("YYYY-MM-DD HH:mm:ss")
+        let fecha = moment.utc(req.params.date + "T02:00:00").format("YYYY-MM-DD HH:mm:ss")
         db.Italy.findAll({
             where: {
                 fecha: fecha
@@ -309,7 +325,7 @@ module.exports = function (app) {
 
     //Get id of certain date Spain Database
     app.get("/api/datosSpain/:date", function (req, res) {
-        let fecha = moment.utc(req.params.date + "T00:00:00").format("YYYY-MM-DD HH:mm:ss")
+        let fecha = moment.utc(req.params.date + "T02:00:00").format("YYYY-MM-DD HH:mm:ss")
         db.Spain.findAll({
             where: {
                 fecha: fecha
@@ -322,7 +338,7 @@ module.exports = function (app) {
 
     //Get id of certain date Mexico Database
     app.get("/api/datosMexico/:date", function (req, res) {
-        let fecha = moment.utc(req.params.date + "T00:00:00").format("YYYY-MM-DD HH:mm:ss")
+        let fecha = moment.utc(req.params.date + "T02:00:00").format("YYYY-MM-DD HH:mm:ss")
         db.Mexico.findAll({
             where: {
                 fecha: fecha

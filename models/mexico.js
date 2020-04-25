@@ -6,6 +6,8 @@ module.exports = function (sequelize, DataTypes) {
         total_deaths:DataTypes.STRING,
         new_deaths:DataTypes.STRING,
         total_recovered:DataTypes.STRING,
+        total_tests:DataTypes.STRING,
+        total_tests_per1m:DataTypes.STRING,
     });
 
     return Mexico;
