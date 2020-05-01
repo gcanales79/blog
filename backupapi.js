@@ -4,60 +4,65 @@ const moment = require('moment-timezone');
 
 //console.log(process.argv[2])
 
-let ISOcountries = ["POL","MEX","ITA","ESP"]
+let ISOcountries = ["POL", "MEX", "ITA", "ESP"]
 
-let countries = ["Poland","Mexico","Italy","Spain"]
+let countries = ["Poland", "Mexico", "Italy", "Spain"]
 
-let fecha_registro = moment(process.argv[2]).add(0, "days").format("YYYY-MM-DD");
+var hoy = moment();
+//let fecha_registro = moment(process.argv[2]).add(0, "days").format("YYYY-MM-DD");
 
+for (let i = 0; i < 2; i++) {
 
-for (let i = 0; i < countries.length; i++) {
+  let fecha_registro = moment(hoy).subtract(i, "days").format("YYYY-MM-DD");
 
-  axios({
-    "method": "GET",
-    "url": "https://covid-19-statistics.p.rapidapi.com/reports",
-    "headers": {
-      "content-type": "application/octet-stream",
-      "x-rapidapi-host": "covid-19-statistics.p.rapidapi.com",
-      "x-rapidapi-key": process.env.RAPID_API_KEY,
-    }, "params": {
-      "iso": ISOcountries[i],
-      "date": fecha_registro,
-    }
-  })
-    .then((response) => {
-      //console.log(response.data)
-      var url = process.env.url;
-      //console.log(url)
-      //let buscarFecha=moment(fecha_registro).format("X")
-      let datosNuevos = response;
-      let numeroDato = i;
-      axios.get(url + "/api/datos" + countries[i] + "/" + fecha_registro, {
+  for (let i = 0; i < countries.length; i++) {
 
-      }).then((response) => {
+    axios({
+      "method": "GET",
+      "url": "https://covid-19-statistics.p.rapidapi.com/reports",
+      "headers": {
+        "content-type": "application/octet-stream",
+        "x-rapidapi-host": "covid-19-statistics.p.rapidapi.com",
+        "x-rapidapi-key": process.env.RAPID_API_KEY,
+      }, "params": {
+        "iso": ISOcountries[i],
+        "date": fecha_registro,
+      }
+    })
+      .then((response) => {
         //console.log(response.data)
-        //console.log(response.data.length)
-        if (response.data.length > 0) {
-          //console.log("El id es " + response.data[0].id + " de " + countries[i])
-          let id = response.data[0].id;
+        var url = process.env.url;
+        //console.log(url)
+        //let buscarFecha=moment(fecha_registro).format("X")
+        let datosNuevos = response;
+        let numeroDato = i;
+        axios.get(url + "/api/datos" + countries[i] + "/" + fecha_registro, {
 
-          console.log("Ya existe")
-          actualizarDatos(datosNuevos, numeroDato, url, id)
+        }).then((response) => {
+          //console.log(response.data)
+          //console.log(response.data.length)
+          if (response.data.length > 0) {
+            //console.log("El id es " + response.data[0].id + " de " + countries[i])
+            let id = response.data[0].id;
+
+            console.log("Ya existe")
+            actualizarDatos(datosNuevos, numeroDato, url, id)
 
 
-        }
-        else {
-          console.log("No hay datos")
-          guardarDatos(datosNuevos, numeroDato, url, countries[i])
-        }
-      })
-        .catch((err) => {
-          console.log(err)
+          }
+          else {
+            console.log("No hay datos")
+            guardarDatos(datosNuevos, numeroDato, url, countries[i])
+          }
         })
-    })
-    .catch((error) => {
-      console.log(error)
-    })
+          .catch((err) => {
+            console.log(err)
+          })
+      })
+      .catch((error) => {
+        console.log(error)
+      })
+  }
 }
 
 
