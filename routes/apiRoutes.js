@@ -46,8 +46,8 @@ module.exports = function (app) {
             total_deaths: req.body.total_deaths,
             new_deaths: req.body.new_deaths,
             total_recovered: req.body.total_recovered,
-            total_tests:req.body.total_tests,
-            total_tests_per1m:req.body.total_tests_per1m,
+            total_tests: req.body.total_tests,
+            total_tests_per1m: req.body.total_tests_per1m,
         }).then((dbPoland) =>
             res.json(dbPoland))
             .catch((err) => {
@@ -64,8 +64,8 @@ module.exports = function (app) {
             total_deaths: req.body.total_deaths,
             new_deaths: req.body.new_deaths,
             total_recovered: req.body.total_recovered,
-            total_tests:req.body.total_tests,
-            total_tests_per1m:req.body.total_tests_per1m,
+            total_tests: req.body.total_tests,
+            total_tests_per1m: req.body.total_tests_per1m,
         }).then((dbItaly) =>
             res.json(dbItaly))
             .catch((err) => {
@@ -82,8 +82,8 @@ module.exports = function (app) {
             total_deaths: req.body.total_deaths,
             new_deaths: req.body.new_deaths,
             total_recovered: req.body.total_recovered,
-            total_tests:req.body.total_tests,
-            total_tests_per1m:req.body.total_tests_per1m,
+            total_tests: req.body.total_tests,
+            total_tests_per1m: req.body.total_tests_per1m,
         }).then((dbMexico) =>
             res.json(dbMexico))
             .catch((err) => {
@@ -100,8 +100,8 @@ module.exports = function (app) {
             total_deaths: req.body.total_deaths,
             new_deaths: req.body.new_deaths,
             total_recovered: req.body.total_recovered,
-            total_tests:req.body.total_tests,
-            total_tests_per1m:req.body.total_tests_per1m,
+            total_tests: req.body.total_tests,
+            total_tests_per1m: req.body.total_tests_per1m,
         }).then((dbSpain) =>
             res.json(dbSpain))
             .catch((err) => {
@@ -171,8 +171,8 @@ module.exports = function (app) {
             total_deaths: req.body.total_deaths,
             new_deaths: req.body.new_deaths,
             total_recovered: req.body.total_recovered,
-            total_tests:req.body.total_tests,
-            total_tests_per1m:req.body.total_tests_per1m,
+            total_tests: req.body.total_tests,
+            total_tests_per1m: req.body.total_tests_per1m,
         }, {
             where: {
                 id: req.params.id,
@@ -193,8 +193,8 @@ module.exports = function (app) {
             total_deaths: req.body.total_deaths,
             new_deaths: req.body.new_deaths,
             total_recovered: req.body.total_recovered,
-            total_tests:req.body.total_tests,
-            total_tests_per1m:req.body.total_tests_per1m,
+            total_tests: req.body.total_tests,
+            total_tests_per1m: req.body.total_tests_per1m,
         }, {
             where: {
                 id: req.params.id,
@@ -215,8 +215,8 @@ module.exports = function (app) {
             total_deaths: req.body.total_deaths,
             new_deaths: req.body.new_deaths,
             total_recovered: req.body.total_recovered,
-            total_tests:req.body.total_tests,
-            total_tests_per1m:req.body.total_tests_per1m,
+            total_tests: req.body.total_tests,
+            total_tests_per1m: req.body.total_tests_per1m,
         }, {
             where: {
                 id: req.params.id,
@@ -237,8 +237,8 @@ module.exports = function (app) {
             total_deaths: req.body.total_deaths,
             new_deaths: req.body.new_deaths,
             total_recovered: req.body.total_recovered,
-            total_tests:req.body.total_tests,
-            total_tests_per1m:req.body.total_tests_per1m,
+            total_tests: req.body.total_tests,
+            total_tests_per1m: req.body.total_tests_per1m,
         }, {
             where: {
                 id: req.params.id,
@@ -344,6 +344,42 @@ module.exports = function (app) {
             where: {
                 fecha: fecha
             }
+        }).then(function (data) {
+            //console.log(data)
+            res.json(data)
+        })
+    })
+
+    //To obtain all the data from Mexico after 20th of APril
+    app.get("/api/abril/datosMexico", function (req, res) {
+        let fechainicial = moment.utc("2020-04-20" + process.env.TIME_API).format("YYYY-MM-DD HH:mm:ss")
+        db.Mexico.findAll({
+            order: [['fecha', 'ASC']],
+            where: {
+                fecha: {
+                    [Op.gte]: fechainicial,
+                }
+            }
+
+
+        }).then(function (data) {
+            //console.log(data)
+            res.json(data)
+        })
+    })
+
+       //To obtain all the data from Polandafter 20th of APril
+       app.get("/api/abril/datosPoland", function (req, res) {
+        let fechainicial = moment.utc("2020-04-20" + process.env.TIME_API).format("YYYY-MM-DD HH:mm:ss")
+        db.Poland.findAll({
+            order: [['fecha', 'ASC']],
+            where: {
+                fecha: {
+                    [Op.gte]: fechainicial,
+                }
+            }
+
+
         }).then(function (data) {
             //console.log(data)
             res.json(data)

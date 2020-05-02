@@ -1,0 +1,228 @@
+<div class="kotha-default-content">
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-8">
+                <article class="single-blog">
+                    <div class="post-thumb">
+                        <img src="assets/images/bitesoftheworldmx-coronavirus.png" alt="">
+                    </div>
+                    <div class="post-content">
+                        <div class="entry-header text-center text-uppercase">
+                            <a href="/coming-soon" class="post-cat">Travel</a>
+                            <h2>Coronavirus Part 2</h2>
+                        </div>
+                        <div class="entry-content">
+                            <p>
+                                So, here is my second post about <em>Coronavirus</em> data. A lot of people have asked
+                                me why I am doing these statics. The reason is that I started reviewing these same
+                                graphs in the financial times at <a
+                                    href="https://www.ft.com/coronavirus-latest">https://www.ft.com/coronavirus-latest</a>.
+                                This work is being done by <a href="https://twitter.com/jburnmurdoch">John
+                                    Burn-Murdoch</a>. I though it was a very interesting data, but unfortunately if you
+                                are not from UK, Italy, Spain, China or US, the rest of the graphs are too small to
+                                really get to any conclusion. For me the two countries that worry me are <b>Poland</b>
+                                and <b>Mexico</b>. All the data that I am presenting comes from <a
+                                    href="https://www.worldometers.info/coronavirus/">Worldmeters</a>. This site has
+                                been tracking the coronavirus data since the beginning of the outbreak. Remember these
+                                graphs are being updated daily. Here are my conclusion to what I can see on the 2nd of
+                                May of 2020.
+                            </p>
+                            </br>
+                            <p>Note: This graph is updated daily so my comments might not be accurate at
+                                the time you see the graph.</p>
+
+                            <div class="row">
+                                <div class="col-sm-12 col-lg">
+                                    <div class="chart-container" id="graficaCasos">
+                                        <h2>Total COVID-19 Cases</h2>
+                                        <div id="loadingGraph" class="loader"></div>
+                                        <canvas id="myChart"></canvas>
+                                    </div>
+                                </div>
+                                <p>Source: <a
+                                        href="https://www.worldometers.info/coronavirus/">https://www.worldometers.info/coronavirus/</a>
+                                </p>
+                            </div>
+                            </br>
+                            </br>
+
+                            <div class="row">
+                                <div class="col-sm-12 col-lg">
+                                    <div class="chart-container" id="graficaPorcentaje">
+                                        <h2>Percentage of Increase of Cases compared to Previous Day</h2>
+                                        <div id="loadingGraph2" class="loader"></div>
+                                        <canvas id="myChart2"></canvas>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row justify-content-center">
+
+                                <div class="col-sm">
+                                    <button type="button" class="btn btn-primary" id="percentageItaly">Italy</button>
+                                    <button type="button" class="btn btn-primary" id="percentageSpain">Spain</button>
+                                    <button type="button" class="btn btn-primary" id="percentageMexico">Mexico</button>
+                                    <button type="button" class="btn btn-primary" id="percentagePoland">Poland</button>
+                                </div>
+                            </div>
+
+                            </br>
+                            </br>
+
+                            <h3 class="text-brand">#Zostanwdomu Poland</h3>
+
+                            <p>
+                                For me the total cases graph is not that important. We know that every day it passes
+                                this graph will increase, so that is not important. The two things that are important is
+                                how fast and in what amount. For that <b><a href="https://twitter.com/jburnmurdoch">John
+                                        Burn-Murdoch</a></b> suggests that the best metric is to see the <b>New Cases
+                                    Per Day in a Seven Day Rolling Average</b>, this way you eliminate the “noises”,
+                                that some countries don’t report the same on weekday than weekends, and other possible
+                                variations. This is really the graph that we are targeting to flattening. Right now, on
+                                the Poland graph it can be seen that the tendency is to be flat at 400 cases per day in
+                                average. As you can see to get it reduce is very hard, in 18 days the average increase
+                                from 66 to 431, but 23 days that curve has not been able to reduce. This is graph that
+                                would tell government if the <em>unlock</em> decisions are being done in a proper matter
+                                or if the <em>social distancing</em> needs to be enforced. The only question I have in
+                                Poland is that testing is being done in a very <em>"linear"</em> mode. In average 12,000
+                                test are being done per day so it is normal to see the same amount of confirmed cases
+                                every day. I think here the testing needs to increase also <em>"exponential"</em>.
+                                Finally, the testing, South Korea has been the <em>"benchmark"</em> on testing, they are
+                                doing 12,240 test per 1M of the population, <b>Poland</b> is at 9,671, still far from
+                                Korea.
+                            </p>
+                            <h4 class="text-brand">New Cases Poland per Day (7-day Rolling Average)</h4>
+                            <div id="graficaNuevoscasosPL"></div>
+                            <p>Source: <a
+                                    href="https://www.worldometers.info/coronavirus/">https://www.worldometers.info/coronavirus/</a>
+                            </p>
+                            <h4 class="text-brand">Testing per Date in Poland</h4>
+                            <div id="graficatestingPL"></div>
+                            <p>Source: <a
+                                    href="https://www.worldometers.info/coronavirus/">https://www.worldometers.info/coronavirus/</a>
+                            </p>
+                            <h4 class="text-brand">Testing per 1M Population Poland</h4>
+                            <div id="grafica1MPL"></div>
+                            <p>Source: <a
+                                    href="https://www.worldometers.info/coronavirus/">https://www.worldometers.info/coronavirus/</a>
+                            </p>
+
+                            <h4 class="text-brand">Death Rate Poland</h4>
+                            <div id="graficaPolonia"></div>
+                            <p>Source: <a
+                                    href="https://www.worldometers.info/coronavirus/">https://www.worldometers.info/coronavirus/</a>
+                            </p>
+
+
+                            <h4 class="text-brand">New Deaths Poland per Day (7-day Rolling Average)</h4>
+                            <div id="graficaNuevosdeathsPL"></div>
+                            <p>Source: <a
+                                    href="https://www.worldometers.info/coronavirus/">https://www.worldometers.info/coronavirus/</a>
+                            </p>
+
+
+                            <h3 class="text-brand">#QuedateEnCasa Mexico</h3>
+                            <p>
+                                Now let’s go to my beloved <b>Mexico</b>. Here the news are not as good as the
+                                government has been trying to tell the people. You can see the <b>New Cases per Day in a
+                                    Seven Day Rolling Average Graph</b> is still going up. Mexico has an average of
+                                <b>1,300</b> cases per day. This is huge if you consider that testing is the
+                                <em>lowest</em> of the OECD countries. This means that with a few testing’s we are
+                                having a lot of cases. <b>Mexico</b> has <b>707</b>cases per 1M of population, that
+                                sounds ridiculous compared to the 12,240 of Korea or the <b>3,000</b> of
+                                <em>Ecuador</em>. I understand the government and the people what the <em>economy</em>
+                                to open, but I guess is better to tell the true to the people that to lie to them. My
+                                advice would be, yes we need to open the economy but our data is not showing a good
+                                trend, let’s keep the vulnerable at their houses, we will increase the testing to keep
+                                the <em>sick</em> in quarantine, and everybody please increase the <b>social
+                                    distancing</b> measures at maximum. Increase the hygiene, wash your hand and cover
+                                mouth, nose and eyes when being outside your house.
+                            </p>
+                            <h4 class="text-brand">New Cases Mexico per Day (7-day Rolling Average)</h4>
+                            <div id="graficaNuevoscasosMX"></div>
+                            <p>Source: <a
+                                    href="https://www.worldometers.info/coronavirus/">https://www.worldometers.info/coronavirus/</a>
+                            </p>
+
+                            <h4 class="text-brand">Testing per Date in Mexico</h4>
+                            <div id="graficatestingMX"></div>
+                            <p>Source: <a
+                                    href="https://www.worldometers.info/coronavirus/">https://www.worldometers.info/coronavirus/</a>
+                            </p>
+                            <h4 class="text-brand">Testing per 1M Population in Mexico</h4>
+                            <div id="grafica1MMX"></div>
+                            <p>Source: <a
+                                    href="https://www.worldometers.info/coronavirus/">https://www.worldometers.info/coronavirus/</a>
+                            </p>
+
+                            <h4 class="text-brand">Death Rate Mexico</h4>
+                            <div id="graficaGoogle"></div>
+                            <p>Source: <a
+                                    href="https://www.worldometers.info/coronavirus/">https://www.worldometers.info/coronavirus/</a>
+                            </p>
+
+
+
+                            <h4 class="text-brand">New Deaths Mexico per Day (7-day Rolling Average)</h4>
+                            <div id="graficaNuevosdeathsMX"></div>
+                            <p>Source: <a
+                                    href="https://www.worldometers.info/coronavirus/">https://www.worldometers.info/coronavirus/</a>
+                            </p>
+
+
+
+                        </div>
+
+                        <div class="post-meta">
+                            <ul class="pull-left list-inline author-meta">
+                                <li class="author">By <a href="#">Netzwerk </a></li>
+                                <li class="date"> On May 2nd, 2020</li>
+                            </ul>
+                            <ul class="pull-right list-inline social-share">
+                                {{> social}}
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+
+
+            </div>
+            <div class="col-sm-4">
+                <div class="kotha-sidebar">
+                    <aside class="widget about-me-widget  text-center">
+                        {{> about}}
+                    </aside>
+                    <!--<aside class="widget news-letter-widget">
+						<h2 class="widget-title text-uppercase text-center">Get Newsletter</h2>
+						<form action="#">
+							<input type="email" placeholder="Your email address" required>
+							<input type="submit" value="Subscribe Now"
+							       class="text-uppercase text-center btn btn-subscribe">
+						</form>
+					</aside>-->
+                    <!--<aside class="widget widget-popular-post">
+						{{> popular}}
+					</aside>-->
+                    <!--<aside class="widget latest-post-widget">
+						{{> latest}}
+					</aside>-->
+                    <aside class="widget insta-widget">
+                        {{> insta}}
+                    </aside>
+                    <!--<aside class="widget add-widget">
+						{{> advertisment}}
+						</div>
+					</aside>-->
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+<script src="https://code.jquery.com/jquery.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.7.3/Chart.js"></script>
+<script src="/assets/js/corona2.js"></script>

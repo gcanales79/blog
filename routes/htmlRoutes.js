@@ -58,6 +58,15 @@ module.exports = function (app) {
 
     });
 
+     //Data Coronavirus part2 
+
+     app.get("/coronavirus-statistics-testing-poland-and-mexico", function (req, res) {
+        res.render("datacorona2", {
+            msg: "Welcome!",
+        });
+
+    });
+
      // Cookies
      app.get("/cookies", function (req, res) {
         res.render("cookies", {
