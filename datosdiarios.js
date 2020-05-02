@@ -61,7 +61,6 @@ for (let i = 0; i < 1; i++) {
                     console.log(response.data.length)
                     if (response.data.length > 0) {
                         console.log("El id es " + response.data[0].id + " de " + countries[i])
-                        let ultimaFecha = moment(response.data[0].fecha).format("YYYY-MM-DD");
                         let id = response.data[0].id;
 
                         console.log("Ya existe")
