@@ -46,9 +46,9 @@ $(document).ready(function () {
                 }
             }
             for (let i = 0; i < datosMX[0].length; i++) {
-                casosMX.push(datosMX[0][i].total_cases);
+                casosMX.push(parseInt(datosMX[0][i].total_cases));
                 deathMX.push(datosMX[0][i].total_deaths);
-                newcasosMX.push(datosMX[0][i].new_cases);
+                newcasosMX.push(parseInt(datosMX[0][i].new_cases));
                 newdeathsMX.push(datosMX[0][i].new_deaths);
 
                 if (i == datosMX[0].length - 1) {
@@ -56,9 +56,9 @@ $(document).ready(function () {
                 }
             }
             for (let i = 0; i < datosPL[0].length; i++) {
-                casosPL.push(datosPL[0][i].total_cases);
+                casosPL.push(parseInt(datosPL[0][i].total_cases));
                 deathPL.push(datosPL[0][i].total_deaths);
-                newcasosPL.push(datosPL[0][i].new_cases);
+                newcasosPL.push(parseInt(datosPL[0][i].new_cases));
                 newdeathsPL.push(datosPL[0][i].new_deaths);
                 if (i == datosPL[0].length - 1) {
                     //console.log(casosPL)
@@ -77,6 +77,7 @@ $(document).ready(function () {
                 newDeathsMXavg(newdeathsMX)
                 newCasesPLavg(newcasosPL)
                 newDeathsPLavg(newdeathsPL)
+                graficaDailyTotal(casosMX, newcasosMX, casosPL, newcasosPL)
             });
 
         })
@@ -108,8 +109,8 @@ $(document).ready(function () {
                 testingMX.push([new Date((datosPL[0][i].fecha).slice(0, 10)), parseInt(datosMX[0][i].total_tests)]);
                 testing1MMX.push([new Date((datosPL[0][i].fecha).slice(0, 10)), parseInt(datosMX[0][i].total_tests_per1m)]);
                 if (i == datosMX[0].length - 1) {
-                    console.log(testingMX)
-                    console.log(testing1MMX)
+                    //console.log(testingMX)
+                    //console.log(testing1MMX)
                 }
             }
             google.charts.load('current', { packages: ['corechart', 'line'] });
@@ -125,6 +126,67 @@ $(document).ready(function () {
         }
 
         )
+
+    }
+
+    function graficaDailyTotal(casosMX, newcasosMX, casosPL, newcasosPL) {
+        let movAvgMX = []
+        let movAvgPL=[]
+        //Get Data from MX and moving Avg.
+        for (let i = 0; i < newcasosMX.length - 6; i++) {
+            movAvgMX.push([casosMX[i+6],(newcasosMX[i] + newcasosMX[i + 1] + newcasosMX[i + 2] +
+                newcasosMX[i + 3] + newcasosMX[i + 4] + newcasosMX[i + 5] + newcasosMX[i + 6])/7])
+            if(i==newcasosMX.length-7){
+                //console.log(movAvgMX)
+            }
+        }
+        //Get Data from PL and moving Avg.
+        for (let i = 0; i < newcasosPL.length - 6; i++) {
+            movAvgPL.push([casosPL[i+6],(newcasosPL[i] + newcasosPL[i + 1] + newcasosPL[i + 2] +
+                newcasosPL[i + 3] + newcasosPL[i + 4] + newcasosPL[i + 5] + newcasosPL[i + 6])/7])
+            if(i==newcasosPL.length-7){
+                //console.log(movAvgPL)
+            }
+        }
+
+        var data1 = new google.visualization.DataTable();
+        data1.addColumn('number', "Total Cases");
+        data1.addColumn('number', 'Mexico');
+
+        data1.addRows(movAvgMX);
+
+        var data2 = new google.visualization.DataTable();
+        data2.addColumn('number', "Total Cases");
+        data2.addColumn('number', 'Poland');
+
+        data2.addRows(movAvgPL);
+
+        var joinedData=google.visualization.data.join(data1,data2,"full",[[0,0]],[1],[1]);
+
+        var options = {
+            colors: ["green","red"],
+            animation: {
+                startup: true,
+                duration: 1000,
+                easing:"in",
+            },
+            interpolateNulls: true,
+            hAxis: {
+                title: 'Total Cases'
+            },
+            vAxis: {
+                title: 'Avg. New Cases (7-day Rolling Avg.)'
+            },
+            legend: {
+                position: "top"
+            },
+            chartArea: { width: "75%" },
+
+
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById("graficaNvoCasosTotalCasos"));
+        chart.draw(joinedData, options);
 
     }
 
@@ -517,7 +579,7 @@ $(document).ready(function () {
         }
         let movavg = []
         for (let i = 0; i < newcasosNum.length - 6; i++) {
-            movavg.push([i, (newcasosNum[i] + newcasosNum[i + 1] + newcasosNum[i + 2] + newcasosNum[i + 3] + newcasosNum[i + 4] + newcasosNum[i + 5] + newcasosNum[i + 6] + newcasosNum[i + 7]) / 7])
+            movavg.push([i, (newcasosNum[i] + newcasosNum[i + 1] + newcasosNum[i + 2] + newcasosNum[i + 3] + newcasosNum[i + 4] + newcasosNum[i + 5] + newcasosNum[i + 6]) / 7])
             if (i == newcasosNum.length - 7) {
                 //console.log(movavg)
             }
@@ -609,7 +671,7 @@ $(document).ready(function () {
         }
         let movavg = []
         for (let i = 0; i < newcasosNum.length - 6; i++) {
-            movavg.push([i, (newcasosNum[i] + newcasosNum[i + 1] + newcasosNum[i + 2] + newcasosNum[i + 3] + newcasosNum[i + 4] + newcasosNum[i + 5] + newcasosNum[i + 6] + newcasosNum[i + 7]) / 7])
+            movavg.push([i, (newcasosNum[i] + newcasosNum[i + 1] + newcasosNum[i + 2] + newcasosNum[i + 3] + newcasosNum[i + 4] + newcasosNum[i + 5] + newcasosNum[i + 6]) / 7])
             if (i == newcasosNum.length - 7) {
                 //console.log(movavg)
             }
@@ -698,9 +760,9 @@ $(document).ready(function () {
         data.addRows(testingPL);
 
         var options = {
-            animation:{
+            animation: {
                 startup: true,
-                duration:1000,
+                duration: 1000,
             },
             colors: ["red"],
             hAxis: {
