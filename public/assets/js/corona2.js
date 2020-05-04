@@ -172,10 +172,12 @@ $(document).ready(function () {
             },
             interpolateNulls: true,
             hAxis: {
-                title: 'Total Cases'
+                title: 'Total Cases',
+                format:"short",
             },
             vAxis: {
-                title: 'Avg. New Cases (7-day Rolling Avg.)'
+                title: 'Avg. New Cases (7-day Rolling Avg.)',
+                format:"short",
             },
             legend: {
                 position: "top"
@@ -766,10 +768,11 @@ $(document).ready(function () {
             },
             colors: ["red"],
             hAxis: {
-                title: 'Date of Report'
+                title: 'Date of Report',
             },
             vAxis: {
-                title: 'Total Test Performed'
+                title: 'Total Test Performed',
+                format:"short"
             },
             legend: {
                 position: "top"
@@ -797,7 +800,8 @@ $(document).ready(function () {
                 title: 'Date of Report'
             },
             vAxis: {
-                title: 'Test per 1M Population'
+                title: 'Test per 1M Population',
+                format:"short"
             },
             legend: {
                 position: "top"
@@ -824,7 +828,8 @@ $(document).ready(function () {
                 title: 'Date of Report'
             },
             vAxis: {
-                title: 'Total Test Performed'
+                title: 'Total Test Performed',
+                format:"short"
             },
             legend: {
                 position: "top"
@@ -852,7 +857,8 @@ $(document).ready(function () {
                 title: 'Date of Report'
             },
             vAxis: {
-                title: 'Test per 1M Population'
+                title: 'Test per 1M Population',
+                format:"short"
             },
             legend: {
                 position: "top"
