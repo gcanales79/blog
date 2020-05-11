@@ -129,6 +129,7 @@ $(document).ready(function () {
 
     }
 
+    //The graph of all the cases Principal class
     function graficaDailyTotal(casosMX, newcasosMX, casosPL, newcasosPL) {
         let movAvgMX = []
         let movAvgPL=[]
@@ -274,6 +275,9 @@ $(document).ready(function () {
                             min: 0,
                             suggestedmax: 150000,
                             callback: function (value, index, values) {
+                                if (value === 500000) return "500,000";
+                                if (value === 300000) return "300,000";
+                                if (value === 200000) return "200,000";
                                 if (value === 150000) return "150,000";
                                 if (value === 100000) return "100,000";
                                 if (value === 50000) return "50,000";
