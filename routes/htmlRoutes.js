@@ -67,6 +67,15 @@ module.exports = function (app) {
 
     });
 
+    //Mexican Food
+
+    app.get("/best-mexican-food-in-warsaw", function (req, res) {
+        res.render("mexican", {
+            msg: "Welcome!",
+        });
+
+    });
+
      // Cookies
      app.get("/cookies", function (req, res) {
         res.render("cookies", {
