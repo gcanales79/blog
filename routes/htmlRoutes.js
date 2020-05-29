@@ -85,6 +85,15 @@ module.exports = function (app) {
 
     });
 
+    //Park Cafe
+
+    app.get("/garden-restaurant-park-cafe-konstancin", function (req, res) {
+        res.render("parkcafe", {
+            msg: "Welcome!",
+        });
+
+    });
+
      // Cookies
      app.get("/cookies", function (req, res) {
         res.render("cookies", {
