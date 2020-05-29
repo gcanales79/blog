@@ -76,6 +76,15 @@ module.exports = function (app) {
 
     });
 
+     //All Food Post
+
+     app.get("/food-post", function (req, res) {
+        res.render("food", {
+            msg: "Welcome!",
+        });
+
+    });
+
      // Cookies
      app.get("/cookies", function (req, res) {
         res.render("cookies", {
