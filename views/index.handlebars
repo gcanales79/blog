@@ -1,9 +1,24 @@
-<div class="container feature-food">
+<div itemscope itemtype="http://schema.org/BlogPosting" class="container feature-food">
+    <!--Data Structured-->
+    <div id="infoBlog" style="display: none;">
+        <span itemprop="datePublished">2020-05-23</span>
+        <span itemprop="dateModified">2020-05-24</span>
+        <span itemprop="author">Bites of the World</span>
+        <a itemprop="mainEntityofPage" href="https://www.bitesoftheworld.mx">https://www.bitesoftheworld.mx</a>
+        <div itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+            <span itemprop="name">Bites of the World</span>
+            <div itemprop="logo" itemscope itemtype="http://schema.org/ImageObject">
+                <img itemprop="url" src="assets/images/Galleta_recorte.jpg" alt="Logo Bites of the World">
+            </div>
+
+        </div>
+    </div>
     <!--Este es el carrusel incial de fotos-->
     <div id="food-feature-carousel">
         <div class="item">
             <div class="feature-food-post">
-                <a href="/garden-restaurant-park-cafe-konstancin"><img src="assets/images/bitesoftheworldmx-parkcafe-board.jpeg" alt="Park Cafe Board"></a>
+                <a href="/garden-restaurant-park-cafe-konstancin"><img
+                        src="assets/images/bitesoftheworldmx-parkcafe-board.jpeg" alt="Park Cafe Board"></a>
                 <div class="category-caption text-center">
                     <a href="/food-post" class="post-cat text-uppercase">Food </a>
                     <h2><a href="/garden-restaurant-park-cafe-konstancin">Park Cafe</a></h2>
@@ -13,7 +28,8 @@
         </div>
         <div class="item">
             <div class="feature-food-post">
-                <a href="/best-mexican-food-in-warsaw"><img src="assets/images/bitesoftheworldmx-mexicanfood.jpg" alt="Mexican Food"></a>
+                <a href="/best-mexican-food-in-warsaw"><img src="assets/images/bitesoftheworldmx-mexicanfood.jpg"
+                        alt="Mexican Food"></a>
                 <div class="category-caption text-center">
                     <a href="/food-post" class="post-cat text-uppercase">Food</a>
                     <h2><a href="/best-mexican-food-in-warsaw">Best Mexican Food in Warsaw</a></h2>
@@ -23,7 +39,8 @@
         </div>
         <div class="item">
             <div class="feature-food-post">
-                <a href="/online-classes-during-lockdown"><img src="assets/images/bitesoftheworldmx-ulalachef.jpeg" alt=""></a>
+                <a href="/online-classes-during-lockdown"><img src="assets/images/bitesoftheworldmx-ulalachef.jpeg"
+                        alt=""></a>
                 <div class="category-caption text-center">
                     <a href="/food-post" class="post-cat text-uppercase">Food</a>
                     <h2><a href="/onlie-classes-during-lockdown">Online Cooking</a></h2>
@@ -51,7 +68,7 @@
                 </div>
             </div>
         </div>
-        
+
         <div class="item">
             <div class="feature-food-post">
                 <a href="/trattoria-da-antonio"><img src="assets/images/tratoria5.jpeg" alt=""></a>
@@ -63,7 +80,7 @@
             </div>
         </div>
 
-      
+
     </div>
     <!--
     <div class="subscribe-newsletter-area">
@@ -251,12 +268,12 @@
                         </form>
                     </aside>-->
                     <!--Popular Post-->
-                    
+
                     <aside class="widget widget-popular-post">
                         {{> popular}}
                     </aside>
                     <!--Latest Post-->
-                    
+
                     <aside class="widget latest-post-widget">
                         {{> latest}}
                     </aside>
