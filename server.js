@@ -1,5 +1,6 @@
 require('dotenv').config()
 const express = require("express");
+const compression =require("compression")
 const bodyParser = require("body-parser");
 var cookieParser = require("cookie-parser")
 const exphbs = require('express-handlebars');
@@ -12,6 +13,7 @@ const morgan=require("morgan")
 
 
 const app = express();
+app.use(compression());
 
 const PORT = process.env.PORT || 3000;
 
