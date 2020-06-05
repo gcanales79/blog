@@ -161,6 +161,36 @@ module.exports = function (app) {
 
     });
 
+    //Books
+
+    app.get("/kindle-books-must-read-management", function (req, res) {
+        res.locals.metaTags={
+            title: "Management Books That You Must Read for Kindle - Bites of the World",
+            description:"Management Books that have changed by way of thinking that can be bought for Kindle",
+            keywords:"books, management, read, books to read, books for kindle, books online, books to read online, books must read"
+
+        }
+        res.render("books", {
+            msg: "Welcome!",
+        });
+
+    });
+
+    //Travel Posts
+
+    app.get("/travel-post", function (req, res) {
+        res.locals.metaTags={
+            title: "Travel Advices - Bites of the World",
+            description:"Travel Advices Hotel Places to Go for Families with Children",
+            keywords:"travel with family, travel, hotel, airplane, cities to visit,things to see"
+
+        }
+        res.render("travel", {
+            msg: "Welcome!",
+        });
+
+    });
+
      // Cookies
      app.get("/cookies", function (req, res) {
         res.locals.metaTags={
