@@ -191,6 +191,20 @@ module.exports = function (app) {
 
     });
 
+    //Flaming and Co.
+    app.get("/nice-food-restaurant-poland-warsaw-flaming-and-co-with-terrace", function (req, res) {
+        res.locals.metaTags={
+            title: "Flaming and Co. a Restaurant with Playground and Nice Garden - Bites of the World",
+            description:"The best food you can get in Warsaw with a playground for the little kids",
+            keywords:"food, restaurant, restaurants, place to go, Warsaw, Poland, place to eat, place to drink, restaurant and playground, family dinning"
+
+        }
+        res.render("flaming", {
+            msg: "Welcome!",
+        });
+
+    });
+
      // Cookies
      app.get("/cookies", function (req, res) {
         res.locals.metaTags={
