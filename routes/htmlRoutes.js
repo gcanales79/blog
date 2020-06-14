@@ -29,7 +29,7 @@ module.exports = function (app) {
 
     });
 
-    // Load Trattoria Da Antonio
+    // Load Trattoria Da Antonio 08MAR20
     app.get("/trattoria-da-antonio", function (req, res) {
         res.locals.metaTags={
             title: "Excellent Italian Trattoria Restaurant in Warsaw – Trattoria Da Antonio- Bites of the World",
@@ -57,7 +57,7 @@ module.exports = function (app) {
 
     });
 
-    // Load Data Coronavirus
+    // Load Data Coronavirus 12APR20
     app.get("/data-coronavirus-poland-and-mexico", function (req, res) {
         res.locals.metaTags={
             title: "Coronavirus data graph of Poland and Mexico - Bites of the World",
@@ -71,7 +71,7 @@ module.exports = function (app) {
 
     });
 
-     // Load Grill Part 1
+     // Load Grill Part 1 13APR20
      app.get("/steak-at-poland", function (req, res) {
         res.locals.metaTags={
             title: "Best Steak in Poland - Bites of the World",
@@ -85,7 +85,7 @@ module.exports = function (app) {
 
     });
 
-    //Load Online Cooking
+    //Load Online Cooking 25APR20
 
     app.get("/online-classes-during-lockdown", function (req, res) {
         res.locals.metaTags={
@@ -100,7 +100,7 @@ module.exports = function (app) {
 
     });
 
-     //Data Coronavirus part2 
+     //Data Coronavirus part2 02MAY20
 
      app.get("/coronavirus-statistics-testing-poland-and-mexico", function (req, res) {
         res.locals.metaTags={
@@ -115,7 +115,7 @@ module.exports = function (app) {
 
     });
 
-    //Mexican Food
+    //Mexican Food 23MAY20
 
     app.get("/best-mexican-food-in-warsaw", function (req, res) {
         res.locals.metaTags={
@@ -146,7 +146,7 @@ module.exports = function (app) {
 
     });
 
-    //Park Cafe
+    //Park Cafe 29MAY20
 
     app.get("/garden-restaurant-park-cafe-konstancin", function (req, res) {
         res.locals.metaTags={
@@ -161,7 +161,7 @@ module.exports = function (app) {
 
     });
 
-    //Books
+    //Books 5JUN20
 
     app.get("/kindle-books-must-read-management", function (req, res) {
         res.locals.metaTags={
@@ -191,7 +191,7 @@ module.exports = function (app) {
 
     });
 
-    //Flaming and Co.
+    //Flaming and Co. 13JUN20
     app.get("/nice-food-restaurant-poland-warsaw-flaming-and-co-with-terrace", function (req, res) {
         res.locals.metaTags={
             title: "Flaming and Co. a Restaurant with Playground and Nice Garden - Bites of the World",
