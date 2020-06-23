@@ -34,8 +34,8 @@ axios({
     }
     })
     .then((response)=>{
-      console.log(response.data.response[0].deaths["1M_pop"])
-      //console.log(Object.keys(response.data.response[0].tests))
+      console.log(response.data.response[0])
+      //console.log(Object.keys(response.data.response[0]))
       var url = process.env.url;
       //console.log(url)
       //let buscarFecha=moment(fecha_registro).format("X")
@@ -92,13 +92,13 @@ function guardarDatos(response,i,url,countries,fecha_registro) {
    
         axios.post(url + "/datos" + countries, {
             fecha: moment(response.data.response[0].day).format("YYYY-MM-DD"),
-            total_cases: response.data.response[0].cases.total,
-            new_cases: nuevosCasos,
-            total_deaths: (response.data.response[0].deaths.total),
-            new_deaths: nuevasMuertes,
-            total_recovered: response.data.response[0].cases.recovered,
-            total_tests: response.data.response[0].tests.total,
-            total_tests_per1m: response.data.response[0].tests["1M_pop"],
+            total_cases: (response.data.response[0].cases.total).toString(),
+            new_cases: nuevosCasos.toString(),
+            total_deaths: (response.data.response[0].deaths.total).toString(),
+            new_deaths: nuevasMuertes.toString(),
+            total_recovered: (response.data.response[0].cases.recovered).toString(),
+            total_tests: (response.data.response[0].tests.total).toString(),
+            total_tests_per1m: (response.data.response[0].tests["1M_pop"]).toString(),
         })
             .then((response) => {
                 //console.log("Los datos son:")
