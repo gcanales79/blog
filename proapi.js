@@ -34,7 +34,7 @@ axios({
     }
     })
     .then((response)=>{
-      //console.log(response.data.response[0])
+      console.log(response.data.response[0].deaths["1M_pop"])
       //console.log(Object.keys(response.data.response[0].tests))
       var url = process.env.url;
       //console.log(url)
@@ -74,18 +74,31 @@ axios({
 function guardarDatos(response, i, url,countries,fecha_registro) {
     //console.log(fecha_registro)
     //console.log(response.data[fecha_registro])
-    let llave="1M_pop"
+    let nuevosCasos=0;
+    let nuevasMuertes=0;
+    if ((response.data.response[0].cases.new)==null){
+        nuevosCasos=0;
+    }
+    else{
+        nuevosCasos=response.data.response[0].cases.new.replace("+","")
+    }
+    if ((response.data.response[0].deaths.new)==null){
+        nuevasMuertes=0;
+    }
+    else{
+        nuevasMuertes=response.data.response[0].deaths.new.replace("+","")
+    }
     
    
         axios.post(url + "/datos" + countries, {
             fecha: moment(response.data.response[0].day).format("YYYY-MM-DD"),
             total_cases: response.data.response[0].cases.total,
-            new_cases: (response.data.response[0].cases.new).replace("+",""),
+            new_cases: nuevosCasos,
             total_deaths: (response.data.response[0].deaths.total),
-            new_deaths: (response.data.response[0].deaths.new).replace("+",""),
+            new_deaths: nuevasMuertes,
             total_recovered: response.data.response[0].cases.recovered,
             total_tests: response.data.response[0].tests.total,
-            total_tests_per1m: response.data.response[0].tests.llave,
+            total_tests_per1m: response.data.response[0].tests["1M_pop"],
         })
             .then((response) => {
                 //console.log("Los datos son:")
@@ -100,15 +113,29 @@ function guardarDatos(response, i, url,countries,fecha_registro) {
 }
 
 function actualizarDatos(response, i, url, id,countries,fecha_registro) {
+    let nuevosCasos=0;
+    let nuevasMuertes=0;
+    if ((response.data.response[0].cases.new)==null){
+        nuevosCasos=0;
+    }
+    else{
+        nuevosCasos=response.data.response[0].cases.new.replace("+","")
+    }
+    if ((response.data.response[0].deaths.new)==null){
+        nuevasMuertes=0;
+    }
+    else{
+        nuevasMuertes=response.data.response[0].deaths.new.replace("+","")
+    }
         axios.put(url + "/api/actualizar/datos" + countries + "/" + id, {
             fecha: moment(response.data.response[0].day).format("YYYY-MM-DD"),
             total_cases: response.data.response[0].cases.total,
-            new_cases: (response.data.response[0].cases.new).replace("+",""),
+            new_cases: nuevosCasos,
             total_deaths: (response.data.response[0].deaths.total),
-            new_deaths: (response.data.response[0].deaths.new).replace("+",""),
+            new_deaths: nuevasMuertes,
             total_recovered: response.data.response[0].cases.recovered,
             total_tests: response.data.response[0].tests.total,
-            total_tests_per1m: response.data.response[0].tests.llave,
+            total_tests_per1m: response.data.response[0].tests["1M_pop"],
         })
             .then((response) => {
                 //console.log("Los datos son:")
