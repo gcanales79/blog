@@ -76,6 +76,7 @@ function guardarDatos(response,i,url,countries,fecha_registro) {
     //console.log(response.data[fecha_registro])
     let nuevosCasos=0;
     let nuevasMuertes=0;
+    let prueba1M="";
     if ((response.data.response[0].cases.new)==null){
         nuevosCasos=0;
     }
@@ -88,6 +89,12 @@ function guardarDatos(response,i,url,countries,fecha_registro) {
     else{
         nuevasMuertes=response.data.response[0].deaths.new.replace("+","")
     }
+    if((response.data.response[0].tests["1M_pop"])==null){
+        pruebas1M=""
+    }
+    else{
+        pruebas1M=response.data.response[0].tests["1M_pop"]
+    }
     
    
         axios.post(process.env.url + "/datos" + countries, {
@@ -98,7 +105,7 @@ function guardarDatos(response,i,url,countries,fecha_registro) {
             new_deaths: nuevasMuertes.toString(),
             total_recovered: (response.data.response[0].cases.recovered).toString(),
             total_tests: (response.data.response[0].tests.total).toString(),
-            total_tests_per1m: (response.data.response[0].tests["1M_pop"]).toString(),
+            total_tests_per1m: pruebas1M.toString(),
         })
             .then((response) => {
                 //console.log("Los datos son:")
@@ -127,15 +134,21 @@ function actualizarDatos(response, i, url, id,countries,fecha_registro) {
     else{
         nuevasMuertes=response.data.response[0].deaths.new.replace("+","")
     }
+    if((response.data.response[0].tests["1M_pop"])==null){
+        pruebas1M=""
+    }
+    else{
+        pruebas1M=response.data.response[0].tests["1M_pop"]
+    }
         axios.put(url + "/api/actualizar/datos" + countries + "/" + id, {
             fecha: moment(response.data.response[0].day).format("YYYY-MM-DD"),
-            total_cases: response.data.response[0].cases.total,
-            new_cases: nuevosCasos,
-            total_deaths: (response.data.response[0].deaths.total),
-            new_deaths: nuevasMuertes,
-            total_recovered: response.data.response[0].cases.recovered,
-            total_tests: response.data.response[0].tests.total,
-            total_tests_per1m: response.data.response[0].tests["1M_pop"],
+            total_cases: (response.data.response[0].cases.total).toString(),
+            new_cases: nuevosCasos.toString(),
+            total_deaths: (response.data.response[0].deaths.total).toString(),
+            new_deaths: nuevasMuertes.toString(),
+            total_recovered: (response.data.response[0].cases.recovered).toString(),
+            total_tests: (response.data.response[0].tests.total).toString(),
+            total_tests_per1m: pruebas1M.toString(),
         })
             .then((response) => {
                 //console.log("Los datos son:")
