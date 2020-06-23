@@ -14,7 +14,7 @@ else{
 
 //dia=moment().format("YYYY-MM-DD")
 
-let countries = ["Poland"/*,"Italy","Mexico","Spain"*/]
+let countries = ["Poland","Italy","Mexico","Spain"]
 
 let fecha_registro = moment(date).add(0, "days").format("YYYY-MM-DD");
 
