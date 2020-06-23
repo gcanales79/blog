@@ -57,7 +57,7 @@ axios({
           }
           else {
               console.log("No hay datos")
-              //guardarDatos(datosNuevos, numeroDato,url,countries[i],fecha_registro)
+              guardarDatos(datosNuevos,numeroDato,url,countries[i],fecha_registro)
           }
       })
           .catch((err) => {
@@ -71,7 +71,7 @@ axios({
 
 }
 
-function guardarDatos(response, i, url,countries,fecha_registro) {
+function guardarDatos(response,i,url,countries,fecha_registro) {
     //console.log(fecha_registro)
     //console.log(response.data[fecha_registro])
     let nuevosCasos=0;
