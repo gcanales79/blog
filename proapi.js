@@ -12,7 +12,7 @@ else{
     var date=process.argv[2]
 }
 
-//date='2020-05-01'
+//dia=moment().format("YYYY-MM-DD")
 
 let countries = ["Poland","Italy","Mexico","Spain"]
 
@@ -22,18 +22,20 @@ for (let i=0; i<countries.length; i++) {
 
 axios({
     "method":"GET",
-    "url":"https://covid19-monitor-pro.p.rapidapi.com/coronavirus/cases_by_days_by_country.php",
+    "url":"https://covid-193.p.rapidapi.com/history",
     "headers":{
     "content-type":"application/octet-stream",
-    "x-rapidapi-host":"covid19-monitor-pro.p.rapidapi.com",
-    "x-rapidapi-key":process.env.RAPID_API_KEY,
+    "x-rapidapi-host":"covid-193.p.rapidapi.com",
+    "x-rapidapi-key":"874b6ea923mshd7377a4cd4343e0p1a39c7jsn23e8edc291e0",
+    "useQueryString":true
     },"params":{
-    "country":countries[i],
+    "day":fecha_registro,
+    "country":countries[i]
     }
     })
     .then((response)=>{
-      //console.log(response.data[date])
-      //console.log(Object.keys(response.data))
+      //console.log(response.data.response[0])
+      //console.log(Object.keys(response.data.response[0].tests))
       var url = process.env.url;
       //console.log(url)
       //let buscarFecha=moment(fecha_registro).format("X")
@@ -72,17 +74,18 @@ axios({
 function guardarDatos(response, i, url,countries,fecha_registro) {
     //console.log(fecha_registro)
     //console.log(response.data[fecha_registro])
+    let llave="1M_pop"
     
-    if (response.data[fecha_registro].total_tests != null) {
+   
         axios.post(url + "/datos" + countries, {
-            fecha: moment(response.data[fecha_registro].record_date).format("YYYY-MM-DD"),
-            total_cases: (response.data[fecha_registro].total_cases).replace(/,/g, ''),
-            new_cases: (response.data[fecha_registro].new_cases).replace(/,/g, ''),
-            total_deaths: (response.data[fecha_registro].total_deaths).replace(/,/g, ''),
-            new_deaths: (response.data[fecha_registro].new_deaths).replace(/,/g, ''),
-            total_recovered: (response.data[fecha_registro].total_recovered).replace(/,/g, ''),
-            total_tests: (response.data[fecha_registro].total_tests).replace(/,/g, ''),
-            total_tests_per1m: (response.data[fecha_registro].tests_per_1m).replace(/,/g, ''),
+            fecha: moment(response.data.response[0].day).format("YYYY-MM-DD"),
+            total_cases: response.data.response[0].cases.total,
+            new_cases: (response.data.response[0].cases.new).replace("+",""),
+            total_deaths: (response.data.response[0].deaths.total),
+            new_deaths: (response.data.response[0].deaths.new).replace("+",""),
+            total_recovered: response.data.response[0].cases.recovered,
+            total_tests: response.data.response[0].tests.total,
+            total_tests_per1m: response.data.response[0].tests.llave,
         })
             .then((response) => {
                 //console.log("Los datos son:")
@@ -91,40 +94,21 @@ function guardarDatos(response, i, url,countries,fecha_registro) {
             .catch((err) => {
                 console.log(err)
             })
-    }
-    else {
-        axios.post(url + "/datos" + countries, {
-            fecha: moment(response.data[fecha_registro].record_date).format("YYYY-MM-DD"),
-            total_cases: (response.data[fecha_registro].total_cases).replace(/,/g, ''),
-            new_cases: (response.data[fecha_registro].new_cases).replace(/,/g, ''),
-            total_deaths: (response.data[fecha_registro].total_deaths).replace(/,/g, ''),
-            new_deaths: (response.data[fecha_registro].new_deaths).replace(/,/g, ''),
-            total_recovered: (response.data[fecha_registro].total_recovered).replace(/,/g, ''),
-            total_tests: (response.data[fecha_registro].total_tests),
-            total_tests_per1m: (response.data[fecha_registro].tests_per_1m),
-        })
-            .then((response) => {
-                //console.log("Los datos son:")
-                console.log(response.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
+    
+    
 
 }
 
 function actualizarDatos(response, i, url, id,countries,fecha_registro) {
-    if (response.data[fecha_registro].total_tests != null) {
         axios.put(url + "/api/actualizar/datos" + countries + "/" + id, {
-            fecha: moment(response.data[fecha_registro].record_date).format("YYYY-MM-DD"),
-            total_cases: (response.data[fecha_registro].total_cases).replace(/,/g, ''),
-            new_cases: (response.data[fecha_registro].new_cases).replace(/,/g, ''),
-            total_deaths: (response.data[fecha_registro].total_deaths).replace(/,/g, ''),
-            new_deaths: (response.data[fecha_registro].new_deaths).replace(/,/g, ''),
-            total_recovered: (response.data[fecha_registro].total_recovered).replace(/,/g, ''),
-            total_tests: (response.data[fecha_registro].total_tests).replace(/,/g, ''),
-            total_tests_per1m: (response.data[fecha_registro].tests_per_1m).replace(/,/g, ''),
+            fecha: moment(response.data.response[0].day).format("YYYY-MM-DD"),
+            total_cases: response.data.response[0].cases.total,
+            new_cases: (response.data.response[0].cases.new).replace("+",""),
+            total_deaths: (response.data.response[0].deaths.total),
+            new_deaths: (response.data.response[0].deaths.new).replace("+",""),
+            total_recovered: response.data.response[0].cases.recovered,
+            total_tests: response.data.response[0].tests.total,
+            total_tests_per1m: response.data.response[0].tests.llave,
         })
             .then((response) => {
                 //console.log("Los datos son:")
@@ -133,24 +117,6 @@ function actualizarDatos(response, i, url, id,countries,fecha_registro) {
             .catch((err) => {
                 console.log(err)
             })
-    }
-    else {
-        axios.put(url + "/api/actualizar/datos" + countries + "/" + id, {
-            fecha: moment(response.data[fecha_registro].record_date).format("YYYY-MM-DD"),
-            total_cases: (response.data[fecha_registro].total_cases).replace(/,/g, ''),
-            new_cases: (response.data[fecha_registro].new_cases).replace(/,/g, ''),
-            total_deaths: (response.data[fecha_registro].total_deaths).replace(/,/g, ''),
-            new_deaths: (response.data[fecha_registro].new_deaths).replace(/,/g, ''),
-            total_recovered: (response.data[fecha_registro].total_recovered).replace(/,/g, ''),
-            total_tests: (response.data[fecha_registro].total_tests),
-            total_tests_per1m: (response.data[fecha_registro].tests_per_1m),
-        })
-            .then((response) => {
-                //console.log("Los datos son:")
-                console.log(response.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-    }
+    
+    
 }
