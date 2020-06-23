@@ -14,7 +14,7 @@ else{
 
 //dia=moment().format("YYYY-MM-DD")
 
-let countries = ["Poland","Italy","Mexico","Spain"]
+let countries = ["Poland"/*,"Italy","Mexico","Spain"*/]
 
 let fecha_registro = moment(date).add(0, "days").format("YYYY-MM-DD");
 
@@ -51,7 +51,7 @@ axios({
               let id = response.data[0].id;
 
               console.log("Ya existe")
-              //actualizarDatos(datosNuevos, numeroDato, url, id,countries[i],fecha_registro)
+              actualizarDatos(datosNuevos, numeroDato, url, id,countries[i],fecha_registro)
 
 
           }
@@ -90,7 +90,7 @@ function guardarDatos(response,i,url,countries,fecha_registro) {
     }
     
    
-        axios.post(url + "/datos" + countries, {
+        axios.post(process.env.url + "/datos" + countries, {
             fecha: moment(response.data.response[0].day).format("YYYY-MM-DD"),
             total_cases: (response.data.response[0].cases.total).toString(),
             new_cases: nuevosCasos.toString(),
