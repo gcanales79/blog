@@ -51,13 +51,13 @@ axios({
               let id = response.data[0].id;
 
               console.log("Ya existe")
-              actualizarDatos(datosNuevos, numeroDato, url, id,countries[i],fecha_registro)
+              //actualizarDatos(datosNuevos, numeroDato, url, id,countries[i],fecha_registro)
 
 
           }
           else {
               console.log("No hay datos")
-              guardarDatos(datosNuevos, numeroDato, url, countries[i],fecha_registro)
+              //guardarDatos(datosNuevos, numeroDato,url,countries[i],fecha_registro)
           }
       })
           .catch((err) => {
