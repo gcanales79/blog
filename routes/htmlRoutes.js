@@ -45,7 +45,7 @@ module.exports = function (app) {
 
     // Load Coronavirus
     app.get("/coronavirus", function (req, res) {
-        es.locals.metaTags={
+        res.locals.metaTags={
             title: "Coronavirus data graph of Poland and Mexico - Bites of the World",
             description:"Same Coronavirus graphs as the Financial Times but specifically of Poland and Mexico. Including Mobility Graphs",
             keywords:"COVID19, Coronavirus, Poland, Mexico, Test per 1M, infected, cases, daily cases, death rate"
