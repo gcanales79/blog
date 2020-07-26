@@ -205,6 +205,20 @@ module.exports = function (app) {
 
     });
 
+     //Pub Lolek 26JUL20
+     app.get("/restaurant-pole-mokotowskie-park-summer-grill-bar-pub-lolek", function (req, res) {
+        res.locals.metaTags={
+            title: "Pub Lolek Great Grill Restaurant in a Beautiful Park - Bites of the World",
+            description:"If you are looking for some grill restaurant Pub Lolek is the place to go",
+            keywords:"food, restaurant, grill, children, park, playgroung, restaurants, place to go, Warsaw, Poland, place to eat, place to drink, restaurant and playground, family dinning"
+
+        }
+        res.render("publolek", {
+            msg: "Welcome!",
+        });
+
+    });
+
      // Cookies
      app.get("/cookies", function (req, res) {
         res.locals.metaTags={
