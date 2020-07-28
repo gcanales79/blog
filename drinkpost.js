@@ -109,7 +109,7 @@ async function downloadImage(drinkIngredient, drinkMeasure, drinkName, drinkPic,
 }
 
 function mediaTweet(drinkIngredient, drinkMeasure, drinkName, drinkPic, drinkInstructions){
-    let data = require('fs').readFileSync("public/assets/images/drink.jpg");
+    let data = require('fs').readFileSync("/home/administrador/blog/public/assets/images/drink.jpg");
 
     // Make post request on media endpoint. Pass file data as media parameter
     const params = {
