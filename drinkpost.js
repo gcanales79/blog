@@ -85,7 +85,7 @@ function postTweet(drinkIngredient, drinkMeasure, drinkName, drinkPic, drinkInst
 async function downloadImage(drinkIngredient, drinkMeasure, drinkName, drinkPic, drinkInstructions) {
     let picEnding = "drink." + drinkPic.split(".").pop()
     const url = drinkPic
-    const path = Path.resolve(__dirname, 'public/assets/images', picEnding)
+    const path = Path.resolve(__dirname, '/home/administrador/blog/public/assets/images', picEnding)
     const writer = Fs.createWriteStream(path)
 
     const response = await axios({
