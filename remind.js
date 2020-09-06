@@ -17,6 +17,7 @@ axios.get(url + "/api/birthday", {
 
 function recordarCumple(datos) {
     console.log(datos)
+    if(datos.length>0){
     for (let i = 0; i < datos.length; i++) {
         axios.post(process.env.url + "/todaybirthday", {
             name: datos[i].surname,
@@ -31,4 +32,8 @@ function recordarCumple(datos) {
                 console.log(err)
             })
     }
+}
+else{
+    console.log("No hay cumpleaños que celebrar")
+}
 }
