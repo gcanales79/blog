@@ -1,5 +1,8 @@
 require('dotenv').config()
 var db = require("../models");
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const clientTwilio = require("twilio")(accountSid, authToken);
 var Twitter = require('twitter');
 var client = new Twitter({
     consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -368,8 +371,8 @@ module.exports = function (app) {
         })
     })
 
-       //To obtain all the data from Polandafter 20th of APril
-       app.get("/api/abril/datosPoland", function (req, res) {
+    //To obtain all the data from Polandafter 20th of APril
+    app.get("/api/abril/datosPoland", function (req, res) {
         let fechainicial = moment.utc("2020-04-20" + process.env.TIME_API).format("YYYY-MM-DD HH:mm:ss")
         db.Poland.findAll({
             order: [['fecha', 'ASC']],
@@ -385,6 +388,50 @@ module.exports = function (app) {
             res.json(data)
         })
     })
+
+    //To obtain the birthdays of today
+    app.get("/api/birthday", function (req, res) {
+        let month=moment().month()+1;
+        let day=moment().date();
+        console.log(day)
+        db.Birthday.findAll({
+            where: {
+                [Op.and]: [
+                    Sequelize.where(Sequelize.fn('DAY', Sequelize.col('birthday')), day),
+                    Sequelize.where(Sequelize.fn('MONTH', Sequelize.col('birthday')), month),
+                ]
+            }
+        }).then(function (data) {
+            res.json(data)
+        })
+    })
+
+    //Send remind of today's birthday
+    app.post("/todaybirthday",function (req, res){
+        let telefonos=[process.env.GUS_PHONE]
+        
+    //* Send messages thru SMS
+        
+    for (var i = 0; i < telefonos.length; i++) {
+      clientTwilio.messages.create({
+        from: process.env.TWILIO_PHONE, // From a valid Twilio number
+        body: "Today is the birthday of " + req.body.name + " " + req.body.surname + ".\n"+
+        "The birthday is " + req.body.birthday,
+        to: telefonos[i],  // Text this number
+
+      })
+        .then(function (message) {
+          console.log("Mensaje de texto: " + message.sid);
+          res.json(message);
+        })
+        .catch((err)=>{
+            res.json(err)
+        })
+    }
+    
+    })
+
+
 
     /*
     //Subscription Push
@@ -408,7 +455,7 @@ module.exports = function (app) {
             await webpush.sendNotification(pushSubscription.subscription, payload);
         }
         catch (error) {
-            console.log(error)
+          console.log(error)
         }
         res.status(200).json()
     })
