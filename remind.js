@@ -26,7 +26,7 @@ function recordarCumple(datos) {
 
         })
             .then((response) => {
-                console.log(response.data.sid)
+                console.log(response.data)
             })
             .catch((err) => {
                 console.log(err)

@@ -391,8 +391,8 @@ module.exports = function (app) {
 
     //To obtain the birthdays of today
     app.get("/api/birthday", function (req, res) {
-        let month=moment().month()+1;
-        let day=moment().date();
+        let month = moment().month() + 1;
+        let day = moment().date();
         console.log(day)
         db.Birthday.findAll({
             where: {
@@ -407,28 +407,47 @@ module.exports = function (app) {
     })
 
     //Send remind of today's birthday
-    app.post("/todaybirthday",function (req, res){
-        let telefonos=[process.env.GUS_PHONE]
-        
-    //* Send messages thru SMS
-        
-    for (var i = 0; i < telefonos.length; i++) {
-      clientTwilio.messages.create({
-        from: process.env.TWILIO_PHONE, // From a valid Twilio number
-        body: "Today is the birthday of " + req.body.name + " " + req.body.surname + ".\n"+
-        "The birthday is " + req.body.birthday,
-        to: telefonos[i],  // Text this number
+    app.post("/todaybirthday", function (req, res) {
+        let telefonos = [process.env.GUS_PHONE]
 
-      })
-        .then(function (message) {
-          console.log("Mensaje de texto: " + message.sid);
-          res.json(message);
-        })
-        .catch((err)=>{
-            res.json(err)
-        })
-    }
-    
+        //* Send messages thru SMS
+        /*
+        for (var i = 0; i < telefonos.length; i++) {
+            clientTwilio.messages.create({
+                from: process.env.TWILIO_PHONE, // From a valid Twilio number
+                body: "Today is the birthday of " + req.body.name + " " + req.body.surname + ".\n" +
+                    "The birthday is " + req.body.birthday,
+                to: telefonos[i],  // Text this number
+
+            })
+                .then(function (message) {
+                    console.log("Mensaje de texto: " + message.sid);
+                    res.json(message);
+                })
+                .catch((err) => {
+                    res.json(err)
+                })
+        }*/
+
+        //* Send message thry whatsapp
+        for (var i = 0; i < telefonos.length; i++) {
+            console.log("whatsapp:" + process.env.TWILIO_PHONE);
+            clientTwilio.messages.create({
+                from: "whatsapp:" + process.env.TWILIO_PHONE, // From a valid Twilio number,
+                body: "Today is the birthday of " + req.body.name + " " + req.body.surname + ".\n\n" +
+                "The birthday is " + req.body.birthday,
+                to: "whatsapp:" + telefonos[i],  // Text this number
+
+            })
+                .then(function (message) {
+                    console.log("Whatsapp:" + message.sid);
+                    res.json(message);
+                })
+                .catch(function (error) {
+                    res.json(error)
+                });
+        }
+
     })
 
 
