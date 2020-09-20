@@ -3,6 +3,7 @@ var db = require("../models");
 const accountSid = process.env.TWILIO_ACCOUNT_SID;
 const authToken = process.env.TWILIO_AUTH_TOKEN;
 const clientTwilio = require("twilio")(accountSid, authToken);
+const VoiceResponse = require('twilio').twiml.VoiceResponse;
 var Twitter = require('twitter');
 var client = new Twitter({
     consumer_key: process.env.TWITTER_CONSUMER_KEY,
@@ -435,7 +436,7 @@ module.exports = function (app) {
             clientTwilio.messages.create({
                 from: "whatsapp:" + process.env.TWILIO_PHONE, // From a valid Twilio number,
                 body: "Today is the birthday of " + req.body.name + " " + req.body.surname + ".\n\n" +
-                "The birthday is " + req.body.birthday,
+                    "The birthday is " + req.body.birthday,
                 to: "whatsapp:" + telefonos[i],  // Text this number
 
             })
@@ -449,6 +450,252 @@ module.exports = function (app) {
         }
 
     })
+
+    //Script 
+    var questions = ["Hola, le hablamos del consultorio del Doctor Canales, para confirmar su cita del 15 de Agosto. Para confirmar marque 1 para cambiar su cita marque 0",
+        "Despues del tono, diga la fecha en que quiere reagendar su cita",
+        "Gracias su cita ha sido confirmada"]
+
+    //Hace la llamada de Twilio
+
+    app.post("/call", function (req, res) {
+        let CelaLlamar = process.env.GUS_PHONE;
+        //console.log("El cel a llamar es " + CelaLlamar);
+
+        let url = process.env.url3 + "/voice"
+
+
+        let options = {
+            to: CelaLlamar,
+            from: process.env.TWILIO_PHONE,
+            url: url,
+        };
+
+        // Place an outbound call to the user, using the TwiML instructions
+        // from the /outbound route
+        clientTwilio.calls.create(options,
+            function (err, call) {
+                if (err) {
+                    console.log(err);
+                }
+                else {
+                    console.log("Llamada exitosa SID: " + call.sid)
+                    db.Appoitment.update({
+                        preguntas_completas: 0,
+                        callSID: call.sid,
+                    }, {
+                        where: {
+                            telefono: process.env.GUS_PHONE,
+                        }
+                    }).then(function (dbResult) {
+                        res.json(dbResult)
+                        //console.log(dbResult)
+                    });
+                }
+            })
+
+    })
+
+
+
+    app.post('/voice', (req, res) => {
+        // Use the Twilio Node.js SDK to build an XML response
+        //console.log("El response es: " + req.body.CallSid)
+        // var celular = request.body.Called;
+        let SID = req.body.CallSid;
+        //questionIndex = 0;
+        //!Revisar se es la primer pregunta del celular
+        db.Appoitment.findOne({
+            where: {
+                callSID: SID,
+            },
+        }).then(function (results) {
+            function respond() {
+                res.type('text/xml');
+                res.send(twiml.toString());
+            }
+            //Si pones el res.json ya no puedes mandar el res.type y res.send
+            //res.json(results);
+            console.log(results.dataValues)
+            const twiml = new VoiceResponse();
+            questionIndex = results.dataValues.preguntas_completas;
+            console.log("El question Index de /voice es " + questionIndex);
+
+            if (questionIndex === 0 || questionIndex === 2) {
+                const gather = twiml.gather({
+                    numDigits: 1,
+                    action: "/gather",
+                });
+                gather.say({
+                    voice: "Polly.Penelope",
+                    language: "es-US",
+                    prosody: {
+                        rate: "85%"
+                    }
+                }, questions[questionIndex]
+                );
+                // If the user doesn't enter input, loop
+                //twiml.redirect('/voice');
+                // Render the response as XML in reply to the webhook request
+                respond();
+            };
+            if (questionIndex === 1) {
+                twiml.say({
+                    voice: "Polly.Penelope",
+                    language: "es-US",
+                    prosody: {
+                        rate: "85%"
+                    }
+                }, questions[questionIndex]
+                )
+                twiml.record({
+                    transcribe: true,
+                    transcribeCallback: "/grabar",
+                    maxLength: 20,
+                    action: "/gather"
+                });
+
+                respond();
+
+
+            }
+        });
+
+    });
+
+    // Create a route that will handle <Gather> input
+    app.post('/gather', (req, res) => {
+        // Use the Twilio Node.js SDK to build an XML response
+        var twiml = new VoiceResponse();
+        const SID = req.body.CallSid;
+        const input = req.body.Digits || req.body.RecordingUrl;
+        db.Appoitment.findOne({
+            where: {
+                callSID: SID,
+            },
+        }).then(function (results) {
+            //res.json(results);
+            console.log(input)
+            let questionIndex = results.preguntas_completas;
+            console.log("El question Index de gather es: " + questionIndex);
+            logica(questionIndex, input, SID)
+
+
+
+            function logica(questionIndex, input, SID) {
+                const twiml = new VoiceResponse();
+                if (questionIndex === 1) {
+                    db.Appoitment.update({
+                        preguntas_completas: 2,
+                        complete: true,
+                    }, {
+                        where: {
+                            callSID: SID,
+                        }
+                    }).then((result) => {
+                        console.log(result)
+                        twiml.redirect('/voice');
+                        res.type('text/xml');
+                        res.send(twiml.toString())
+                    })
+
+                }
+                else {
+                    switch (input) {
+                        case "0":
+                            db.Appoitment.update({
+                                preguntas_completas: 1,
+                                complete: true,
+                            }, {
+                                where: {
+                                    callSID: SID,
+                                }
+                            }).then((result) => {
+                                console.log(result)
+                                twiml.redirect('/voice');
+                                res.type('text/xml');
+                                res.send(twiml.toString())
+                            })
+                            break;
+                        case "1":
+                            db.Appoitment.update({
+                                preguntas_completas: 2,
+                                complete: true,
+                            }, {
+                                where: {
+                                    callSID: SID,
+                                }
+                            }).then((result) => {
+                                console.log(result)
+                                twiml.redirect('/voice');
+                                res.type('text/xml');
+                                res.send(twiml.toString())
+                            })
+                            break;
+                        default:
+                            twiml.say({
+                                voice: "Polly.Penelope",
+                                language: "es-US",
+                                prosody: {
+                                    rate: "85%"
+                                }
+                            }, "No es una opcion valida");
+                            twiml.redirect('/voice');
+                            res.type('text/xml');
+                            res.send(twiml.toString());
+                            break;
+
+                    }
+                }
+
+            }
+
+
+        });
+    });
+
+    app.post("/grabar", (req, res) => {
+        console.log(req.body.TranscriptionStatus)
+        console.log(req.body.TranscriptionText)
+
+        function tenerStatus() {
+            let data = res.json()
+            //console.log(data.req.body.TranscriptionStatus)
+            //console.log(data.req.body.TranscriptionText)
+            return res.status(200).end()
+        }
+
+
+        grabarRespuesta();
+
+        async function grabarRespuesta() {
+            const status = await tenerStatus();
+            const SID = req.body.CallSid;
+            const recording = req.body.RecordingUrl;
+            let text="";
+            if (req.body.TranscriptionStatus == "completed") {
+                text = req.body.TranscriptionText;
+            }
+            else {
+                text = req.body.TranscriptionStatus;
+            }
+            db.Appoitment.update({
+                mensaje: text,
+                url: recording,
+            }, {
+                where: {
+                    callSID: SID,
+                }
+            }).then((result) => {
+                console.log(result)
+
+            })
+        }
+
+    })
+
+
+
 
 
 

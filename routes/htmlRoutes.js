@@ -210,10 +210,24 @@ module.exports = function (app) {
         res.locals.metaTags={
             title: "Pub Lolek Great Grill Restaurant in a Beautiful Park - Bites of the World",
             description:"If you are looking for some grill restaurant Pub Lolek is the place to go",
-            keywords:"food, restaurant, grill, children, park, playgroung, restaurants, place to go, Warsaw, Poland, place to eat, place to drink, restaurant and playground, family dinning"
+            keywords:"food, restaurant, grill, children, park, playground, restaurants, place to go, Warsaw, Poland, place to eat, place to drink, restaurant and playground, family dinning"
 
         }
         res.render("publolek", {
+            msg: "Welcome!",
+        });
+
+    });
+
+      //About Me 20SEP20
+      app.get("/about", function (req, res) {
+        res.locals.metaTags={
+            title: "About Me - Bites of the World",
+            description:"Blog with plenty of ideas of where to eat specially in Warsaw",
+            keywords:"food, restaurant, grill, children, park, playground, restaurants, place to go, Warsaw, Poland, place to eat, place to drink, restaurant and playground, family dinning"
+
+        }
+        res.render("aboutme", {
             msg: "Welcome!",
         });
 
