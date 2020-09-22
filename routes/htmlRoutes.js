@@ -238,7 +238,15 @@ module.exports = function (app) {
         res.locals.metaTags = {
             title: "About Me - Bites of the World",
             description: "Zakopane is also fun in the summer, visit Lake Morskie and Gubalowka",
-            keywords: "Zakopane, gravitational slide, morskie oko, lake, food, restaurant, grill, children, park, playground, restaurants, place to go, Warsaw, Poland, place to eat, place to drink, restaurant and playground, family dinning"
+            keywords: "Zakopane, gravitational slide, morskie oko, lake, food, restaurant, grill, children, park, playground, restaurants, place to go, Warsaw, Poland, place to eat, place to drink, restaurant and playground, family dinning",
+            cardType: "summary",
+            site: "@bitesworld_mx" ,
+            creator:"@bitesworld_mx",
+            url:"https://bitesoftheworld.mx/be-happy-in-zakopane-lake-morskie-oko-gravitational-slide",
+            twitterTitle:"Discover one of the most beautiful lakes in the World",
+            twitterDescription:"Lake Morskie Oko is a must to see when you are in Zakopane",
+            image:"https://bitesoftheworld.mx/assets/images/bitesoftheworldmx-zakopane-morskie-oko-min.jpeg",
+
 
         }
         res.render("zakopane", {
