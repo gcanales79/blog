@@ -121,7 +121,13 @@ module.exports = function (app) {
         res.locals.metaTags = {
             title: "Best mexican food in Warsaw - Bites of the World",
             description: "Recommendation of the best places to eat Mexican food in Warsaw",
-            keywords: "food, restaurant, restaurants, place to go, Warsaw, Konstancin, Monterrey, place to eat, place to drink"
+            keywords: "food, restaurant, restaurants, place to go, Warsaw, Konstancin, Monterrey, place to eat, place to drink",
+            site: "@bitesworld_mx" ,
+            creator:"@bitesworld_mx",
+            url:"https://bitesoftheworld.mx/best-mexican-food-in-warsaw",
+            twitterTitle:"Best Mexican Food in Warsaw",
+            twitterDescription:"If you want to find authentic mexican food in Warsaw you can go to these places.",
+            image:"https://bitesoftheworld.mx/assets/images/bitesoftheworldmx-tacospastor.png",
 
         }
 
