@@ -122,6 +122,7 @@ module.exports = function (app) {
             title: "Best mexican food in Warsaw - Bites of the World",
             description: "Recommendation of the best places to eat Mexican food in Warsaw",
             keywords: "food, restaurant, restaurants, place to go, Warsaw, Konstancin, Monterrey, place to eat, place to drink",
+            cardType: "summary_large_image",
             site: "@bitesworld_mx" ,
             creator:"@bitesworld_mx",
             url:"https://bitesoftheworld.mx/best-mexican-food-in-warsaw",
