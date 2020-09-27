@@ -11,7 +11,7 @@ module.exports = function (app) {
             site: "@bitesworld_mx" ,
             creator:"@bitesworld_mx",
             url:"https://bitesoftheworld.mx/",
-            twitterTitle:"Blog about food and places.",
+            twitterTitle:"Blog about food and places to visit.",
             twitterDescription:"Blog with plenty of ideas of restaurants or places to go mainly of Warsaw and Monterrey.",
             image:"https://bitesoftheworld.mx/assets/images/Logoblanco.jpg"
 
