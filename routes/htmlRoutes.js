@@ -224,7 +224,14 @@ module.exports = function (app) {
         res.locals.metaTags = {
             title: "Pub Lolek Great Grill Restaurant in a Beautiful Park - Bites of the World",
             description: "If you are looking for some grill restaurant Pub Lolek is the place to go",
-            keywords: "food, restaurant, grill, children, park, playground, restaurants, place to go, Warsaw, Poland, place to eat, place to drink, restaurant and playground, family dinning"
+            keywords: "food, restaurant, grill, children, park, playground, restaurants, place to go, Warsaw, Poland, place to eat, place to drink, restaurant and playground, family dinning",
+            cardType: "summary_large_image",
+            site: "@bitesworld_mx" ,
+            creator:"@bitesworld_mx",
+            url:"https://bitesoftheworld.mx/restaurant-pole-mokotowskie-park-summer-grill-bar-pub-lolek",
+            twitterTitle:"One of the best grill places in Warsaw.",
+            twitterDescription:"Lolek is the year-round kingdom of charcoal grilled dishes, known for delicious pork neck, sausage and baked potatoes",
+            image:"https://bitesoftheworld.mx/assets/images/bitesoftheworldmx-publolek-main.JPEG"
 
         }
         res.render("publolek", {
