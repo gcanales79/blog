@@ -6,7 +6,14 @@ module.exports = function (app) {
         res.locals.metaTags = {
             title: "Bites of the World - Blog About Food and Travel",
             description: "A lover of food and great places to enjoy with the family",
-            keywords: "food, restaurant, restaurants, place to go, Warsaw, Monterrey, place to eat, place to drink"
+            keywords: "food, restaurant, restaurants, place to go, Warsaw, Monterrey, place to eat, place to drink",
+            cardType: "summary_large_image",
+            site: "@bitesworld_mx" ,
+            creator:"@bitesworld_mx",
+            url:"https://bitesoftheworld.mx/",
+            twitterTitle:"Blog about food and places.",
+            twitterDescription:"Blog with plenty of ideas of restaurants or places to go mainly of Warsaw and Monterrey.",
+            image:"https://bitesoftheworld.mx/assets/images/Logoblanco.jpg"
 
         }
         res.render("index", {
