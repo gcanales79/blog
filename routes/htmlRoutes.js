@@ -83,7 +83,14 @@ module.exports = function (app) {
         res.locals.metaTags = {
             title: "Best Steak in Poland - Bites of the World",
             description: "Recommendation of butcheries where you can buy the best steak in Warsaw.",
-            keywords: "food, restaurant, restaurants, place to go, Warsaw, Konstancin, Monterrey, place to eat, place to drink"
+            keywords: "food, restaurant, restaurants, place to go, Warsaw, Konstancin, Monterrey, place to eat, place to drink",
+            cardType: "summary_large_image",
+            site: "@bitesworld_mx" ,
+            creator:"@bitesworld_mx",
+            url:"https://bitesoftheworld.mx/steak-at-poland",
+            twitterTitle:"Where to Find the Best Meat to Grill in Warsaw",
+            twitterDescription:"There are few local places in Warsaw where you can get excellent meat for the grill.",
+            image:"https://bitesoftheworld.mx/assets/images/bitesoftheworldmx-topgrille-steak.jpeg"
 
         }
         res.render("steak", {
