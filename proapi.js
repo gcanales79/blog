@@ -26,7 +26,7 @@ axios("https://corona.lmao.ninja/v2/countries/"+countries[i]+"?yesterday&strict&
     .then((response)=>{
       //console.log(response.data)
       //console.log(Object.keys(response.data.response[0]))
-      var url = process.env.url;
+      var url = process.env.url_blog;
       //console.log(url)
       //let buscarFecha=moment(fecha_registro).format("X")
       let datosNuevos = response;
@@ -68,7 +68,7 @@ function guardarDatos(response,i,url,countries,fecha_registro) {
     //console.log(response.data[fecha_registro])
        
    
-        axios.post(process.env.url + "/datos" + countries, {
+        axios.post(process.env.url_blog + "/datos" + countries, {
             fecha: fecha_registro,
             total_cases: response.data.cases,
             new_cases: response.data.todayCases,

@@ -2,7 +2,7 @@ require('dotenv').config()
 const axios = require("axios");
 const moment = require('moment-timezone');
 
-let url = process.env.url
+let url = process.env.url_blog
 
 axios.get(url + "/api/birthday", {
 
