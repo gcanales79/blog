@@ -19,7 +19,7 @@ function recordarCumple(datos) {
     console.log(datos)
     if(datos.length>0){
     for (let i = 0; i < datos.length; i++) {
-        axios.post(process.env.url + "/todaybirthday", {
+        axios.post(process.env.url_blog + "/todaybirthday", {
             name: datos[i].surname,
             surname: datos[i].name,
             birthday: moment(datos[i].birthday).format("DD-MMM-YYYY")
