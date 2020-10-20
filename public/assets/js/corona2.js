@@ -132,20 +132,20 @@ $(document).ready(function () {
     //The graph of all the cases Principal class
     function graficaDailyTotal(casosMX, newcasosMX, casosPL, newcasosPL) {
         let movAvgMX = []
-        let movAvgPL=[]
+        let movAvgPL = []
         //Get Data from MX and moving Avg.
         for (let i = 0; i < newcasosMX.length - 6; i++) {
-            movAvgMX.push([casosMX[i+6],(newcasosMX[i] + newcasosMX[i + 1] + newcasosMX[i + 2] +
-                newcasosMX[i + 3] + newcasosMX[i + 4] + newcasosMX[i + 5] + newcasosMX[i + 6])/7])
-            if(i==newcasosMX.length-7){
+            movAvgMX.push([casosMX[i + 6], (newcasosMX[i] + newcasosMX[i + 1] + newcasosMX[i + 2] +
+                newcasosMX[i + 3] + newcasosMX[i + 4] + newcasosMX[i + 5] + newcasosMX[i + 6]) / 7])
+            if (i == newcasosMX.length - 7) {
                 //console.log(movAvgMX)
             }
         }
         //Get Data from PL and moving Avg.
         for (let i = 0; i < newcasosPL.length - 6; i++) {
-            movAvgPL.push([casosPL[i+6],(newcasosPL[i] + newcasosPL[i + 1] + newcasosPL[i + 2] +
-                newcasosPL[i + 3] + newcasosPL[i + 4] + newcasosPL[i + 5] + newcasosPL[i + 6])/7])
-            if(i==newcasosPL.length-7){
+            movAvgPL.push([casosPL[i + 6], (newcasosPL[i] + newcasosPL[i + 1] + newcasosPL[i + 2] +
+                newcasosPL[i + 3] + newcasosPL[i + 4] + newcasosPL[i + 5] + newcasosPL[i + 6]) / 7])
+            if (i == newcasosPL.length - 7) {
                 //console.log(movAvgPL)
             }
         }
@@ -162,23 +162,23 @@ $(document).ready(function () {
 
         data2.addRows(movAvgPL);
 
-        var joinedData=google.visualization.data.join(data1,data2,"full",[[0,0]],[1],[1]);
+        var joinedData = google.visualization.data.join(data1, data2, "full", [[0, 0]], [1], [1]);
 
         var options = {
-            colors: ["green","red"],
+            colors: ["green", "red"],
             animation: {
                 startup: true,
                 duration: 1000,
-                easing:"in",
+                easing: "in",
             },
             interpolateNulls: true,
             hAxis: {
                 title: 'Total Cases',
-                format:"short",
+                format: "short",
             },
             vAxis: {
                 title: 'Avg. New Cases (7-day Rolling Avg.)',
-                format:"short",
+                format: "short",
             },
             legend: {
                 position: "top"
@@ -273,12 +273,11 @@ $(document).ready(function () {
                         ticks: {
                             beginAtZero: true,
                             min: 0,
-                            suggestedmax: 150000,
+                            suggestedmax: 1500000,
                             callback: function (value, index, values) {
                                 if (value === 1500000) return "1,500,000";
                                 if (value === 1200000) return "1,200,000";
                                 if (value === 900000) return "900,000";
-                                if (value === 700000) return "700,000";
                                 if (value === 500000) return "500,000";
                                 if (value === 300000) return "300,000";
                                 if (value === 200000) return "200,000";
@@ -342,7 +341,7 @@ $(document).ready(function () {
                 label = "Italy"
                 colorBarras = "rgb(255,99,132"
                 for (let i = 0; i < casosIT.length - 1; i++) {
-                    porcentaje.push({"x":i.toString(),"y":parseInt(((casosIT[i + 1] - casosIT[i]) / casosIT[i] * 100).toFixed(0))})
+                    porcentaje.push({ "x": i.toString(), "y": parseInt(((casosIT[i + 1] - casosIT[i]) / casosIT[i] * 100).toFixed(0)) })
                     if (i == casosIT.length - 2) {
                         //console.log(porcentaje)
                     }
@@ -352,7 +351,7 @@ $(document).ready(function () {
                 for (let i = 0; i < casosES.length - 1; i++) {
                     label = "Spain"
                     colorBarras = "rgba(75, 192, 192"
-                    porcentaje.push({"x":i.toString(),"y":parseInt(((casosES[i + 1] - casosES[i]) / casosES[i] * 100).toFixed(0))})
+                    porcentaje.push({ "x": i.toString(), "y": parseInt(((casosES[i + 1] - casosES[i]) / casosES[i] * 100).toFixed(0)) })
                     if (i == casosES.length - 2) {
                         //console.log(porcentaje)
                     }
@@ -362,7 +361,7 @@ $(document).ready(function () {
                 for (let i = 0; i < casosMX.length - 1; i++) {
                     label = "Mexico";
                     colorBarras = "rgba(54, 162, 235"
-                    porcentaje.push({"x":i.toString(),"y":parseInt(((casosMX[i + 1] - casosMX[i]) / casosMX[i] * 100).toFixed(0))})
+                    porcentaje.push({ "x": i.toString(), "y": parseInt(((casosMX[i + 1] - casosMX[i]) / casosMX[i] * 100).toFixed(0)) })
                     if (i == casosMX.length - 2) {
                         //console.log(porcentaje)
                     }
@@ -372,7 +371,7 @@ $(document).ready(function () {
                 for (let i = 0; i < casosPL.length - 1; i++) {
                     label = "Poland";
                     colorBarras = "rgb(254,214,0"
-                    porcentaje.push({"x":i.toString(),"y":parseInt(((casosPL[i + 1] - casosPL[i]) / casosPL[i] * 100).toFixed(0))})
+                    porcentaje.push({ "x": i.toString(), "y": parseInt(((casosPL[i + 1] - casosPL[i]) / casosPL[i] * 100).toFixed(0)) })
                     if (i == casosPL.length - 2) {
                         //console.log(porcentaje)
                     }
@@ -381,7 +380,7 @@ $(document).ready(function () {
         }
 
         //To have the last 50 values
-        porcentaje=porcentaje.slice(-50)
+        porcentaje = porcentaje.slice(-50)
         console.log(porcentaje)
 
 
@@ -785,7 +784,7 @@ $(document).ready(function () {
             },
             vAxis: {
                 title: 'Total Test Performed',
-                format:"short"
+                format: "short"
             },
             legend: {
                 position: "top"
@@ -814,7 +813,7 @@ $(document).ready(function () {
             },
             vAxis: {
                 title: 'Test per 1M Population',
-                format:"short"
+                format: "short"
             },
             legend: {
                 position: "top"
@@ -842,7 +841,7 @@ $(document).ready(function () {
             },
             vAxis: {
                 title: 'Total Test Performed',
-                format:"short"
+                format: "short"
             },
             legend: {
                 position: "top"
@@ -871,7 +870,7 @@ $(document).ready(function () {
             },
             vAxis: {
                 title: 'Test per 1M Population',
-                format:"short"
+                format: "short"
             },
             legend: {
                 position: "top"
