@@ -275,6 +275,10 @@ $(document).ready(function () {
                             min: 0,
                             suggestedmax: 150000,
                             callback: function (value, index, values) {
+                                if (value === 1500000) return "1,500,000";
+                                if (value === 1200000) return "1,200,000";
+                                if (value === 900000) return "900,000";
+                                if (value === 700000) return "700,000";
                                 if (value === 500000) return "500,000";
                                 if (value === 300000) return "300,000";
                                 if (value === 200000) return "200,000";
@@ -338,7 +342,7 @@ $(document).ready(function () {
                 label = "Italy"
                 colorBarras = "rgb(255,99,132"
                 for (let i = 0; i < casosIT.length - 1; i++) {
-                    porcentaje.push(((casosIT[i + 1] - casosIT[i]) / casosIT[i] * 100).toFixed(0))
+                    porcentaje.push({"x":i.toString(),"y":parseInt(((casosIT[i + 1] - casosIT[i]) / casosIT[i] * 100).toFixed(0))})
                     if (i == casosIT.length - 2) {
                         //console.log(porcentaje)
                     }
@@ -348,7 +352,7 @@ $(document).ready(function () {
                 for (let i = 0; i < casosES.length - 1; i++) {
                     label = "Spain"
                     colorBarras = "rgba(75, 192, 192"
-                    porcentaje.push(((casosES[i + 1] - casosES[i]) / casosES[i] * 100).toFixed(0))
+                    porcentaje.push({"x":i.toString(),"y":parseInt(((casosES[i + 1] - casosES[i]) / casosES[i] * 100).toFixed(0))})
                     if (i == casosES.length - 2) {
                         //console.log(porcentaje)
                     }
@@ -358,7 +362,7 @@ $(document).ready(function () {
                 for (let i = 0; i < casosMX.length - 1; i++) {
                     label = "Mexico";
                     colorBarras = "rgba(54, 162, 235"
-                    porcentaje.push(((casosMX[i + 1] - casosMX[i]) / casosMX[i] * 100).toFixed(0))
+                    porcentaje.push({"x":i.toString(),"y":parseInt(((casosMX[i + 1] - casosMX[i]) / casosMX[i] * 100).toFixed(0))})
                     if (i == casosMX.length - 2) {
                         //console.log(porcentaje)
                     }
@@ -368,7 +372,7 @@ $(document).ready(function () {
                 for (let i = 0; i < casosPL.length - 1; i++) {
                     label = "Poland";
                     colorBarras = "rgb(254,214,0"
-                    porcentaje.push(((casosPL[i + 1] - casosPL[i]) / casosPL[i] * 100).toFixed(0))
+                    porcentaje.push({"x":i.toString(),"y":parseInt(((casosPL[i + 1] - casosPL[i]) / casosPL[i] * 100).toFixed(0))})
                     if (i == casosPL.length - 2) {
                         //console.log(porcentaje)
                     }
@@ -376,11 +380,16 @@ $(document).ready(function () {
                 break;
         }
 
+        //To have the last 50 values
+        porcentaje=porcentaje.slice(-50)
+        console.log(porcentaje)
+
+
 
         let ejeY = []
         for (let i = 0; i < porcentaje.length; i++) {
             if (i % 5 == 0) {
-                ejeY.push(i)
+                ejeY.push(porcentaje[i].x)
             }
             else {
                 ejeY.push("")
