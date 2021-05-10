@@ -47,9 +47,10 @@ for (let i = 0; i < 1; i++) {
             }
         })
             .then((response) => {
+                console.log(response.data)
                 //console.log(response.data.stat_by_country[response.data.stat_by_country.length - 1]);
                 //console.log(moment(response.data.stat_by_country[response.data.stat_by_country.length - 1].record_date).format("YYYY-MM-DD"))
-                var url = process.env.url;
+                var url = process.env.url_blog;
                 //console.log(url)
                 //let buscarFecha=moment(fecha_registro).format("X")
                 let datosNuevos = response;
@@ -57,7 +58,7 @@ for (let i = 0; i < 1; i++) {
                 axios.get(url + "/api/datos" + countries[i] + "/" + fecha_registro, {
 
                 }).then((response) => {
-                    console.log(response.data)
+                    console.log(response)
                     console.log(response.data.length)
                     if (response.data.length > 0) {
                         console.log("El id es " + response.data[0].id + " de " + countries[i])
